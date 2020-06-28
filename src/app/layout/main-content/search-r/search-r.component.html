@@ -7,7 +7,7 @@
     <!--<th>pChembl value</th>-->
     <!-- <th>Formula</th> -->
     <th>Mol Weight</th>
-    <th>Slogp</th>
+    <th>Alogp</th>
     <th>HBA</th>
     <th>HBD</th>
     <th>RTB</th>
@@ -31,32 +31,32 @@
     </td>
     <td>
         <ng-container>
-            {{ar?.amw}}
+            {{ar?.MW}}
            </ng-container>
     </td>
     <td>
         <ng-container>
-            {{ar?.slogp}}
+            {{ar?.Alogp}}
            </ng-container>
     </td>
     <td>
         <ng-container>
-            {{ar?.numhba}}
+            {{ar?.HBA}}
            </ng-container>
     </td>
     <td>
         <ng-container>
-            {{ar?.numhbd}}
+            {{ar?.HBD}}
            </ng-container>
     </td>
     <td>
         <ng-container>
-            {{ar?.numrotatablebonds}}
+            {{ar?.ROTB}}
            </ng-container>
     </td>
     <td>
         <ng-container>
-            {{ar?.tpsa}}
+            {{ar?.PSA}}
            </ng-container>
     </td>
   </tr>

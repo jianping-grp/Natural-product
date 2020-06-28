@@ -9,15 +9,14 @@ import { Router} from '@angular/router';
 export class ShouyeComponent implements OnInit {
   scontent = '';
   scontentt = '';
+  scontentd ='';
   @ViewChild('content') content: ElementRef;
   @ViewChild('contentt') contentt: ElementRef;
+  @ViewChild('contentt') contentd: ElementRef;
   @Input() color ='primary';
   @Input() color2 ='primary';
   constructor(  private router: Router) { }
   ngOnInit() {
-  //   $(document).ready(function() {
-  //     $('#example').DataTable();
-  // } );
   }
 
   chazhao() {
@@ -28,5 +27,9 @@ export class ShouyeComponent implements OnInit {
   chazhaot() {
     this.scontentt ='?search=' +this.contentt.nativeElement.value;
     this.router.navigate(['/target-table/', this.scontentt]);
+  }
+  chazhaod() {
+    this.scontentd ='?search=' +this.contentd.nativeElement.value;
+    this.router.navigate(['/derivative-table/', this.scontentd]);
   }
 }

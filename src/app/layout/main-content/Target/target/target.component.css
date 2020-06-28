@@ -9,7 +9,10 @@ a{
     text-decoration:none
 }
 .table{
-    width: 600px;
+    width: 100%;
+}
+.mat-table{
+    width:100%;
 }
 .wrap{
     width: 670px; 

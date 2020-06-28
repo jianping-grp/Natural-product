@@ -13,7 +13,7 @@ export class BDerivativeComponent implements OnInit {
   arr  = [];
   result1 = 'D127771';
   pageMeta: PageMeta | null;
-  @Input() pageSizeOptions = [5, 10];
+  @Input() pageSizeOptions =[ 10,20,50,100];;
   constructor(
     private restservice: RestService,
     public dialog: MatDialog,
@@ -30,7 +30,7 @@ export class BDerivativeComponent implements OnInit {
 getData(page, perPage){
   this.restservice.getDataList(`DerAct/?der_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.arr=data['der_acts'],
+      this.arr=data['der_act2s'],
       this.pageMeta=data['meta']
       console.log(this.arr)
   });

@@ -32,8 +32,8 @@ export class TableTargetComponent implements OnInit {
     
   ];
     toppings = new FormControl();
-    toppingList: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
-    displayedColumns: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
+    toppingList: string[] = ['Pref Name', 'Target Id', 'Target Type','Organism'];
+    displayedColumns: string[] = ['Pref Name', 'Target Id', 'Target Type','Organism'];
     images = [];
     result1: string;
     scontent: string;
@@ -44,26 +44,22 @@ export class TableTargetComponent implements OnInit {
     @Input() result1$: Observable<string>;
     @Input() pageSizeOptions = [10,20,50,100];
     @Input() pageSize = 10;
-constructor(
+  constructor(
     private restservice: RestService ,
     private myrouter: ActivatedRoute,
     private myRouter: Router,
     ) { }
-ngOnInit() {
+  ngOnInit() {
     this.myrouter.paramMap.subscribe((params: ParamMap) => {
     console.log(params);
     this.result1 = params.get('id');
     this._getDrugs(0, this.pageSize);
-  });
-}
-hqnew() {
-      this.result1 = this.content.nativeElement.value;
-      this._getDrugs(0, this.pageSize);
-}
+    });
+  }
 private _getDrugs(page?, perPage?) {
     this.restservice.getDataList(`TargetInfo/${this.result1}&ordering=target_id`, page, perPage)
     .subscribe(data => {
-      this.images = data['target_infos'];
+      this.images = data['target_info2s'];
       this.total_results = data['meta']['total_results'];
       console.log(this.images);
     });
@@ -71,60 +67,5 @@ private _getDrugs(page?, perPage?) {
 pageChange(event) {
   this._getDrugs(event.pageIndex, event.pageSize);
 }
-cellClicked(params){
-  this.myRouter.navigateByUrl(`target/${params.data.tid}`)
-  console.log(params)
-}
-cellMouseDown(params){}
-onBtExport() {
-  this.params = {
-    fileName: this.fileName1,
-    sheetName: this.sheetName1
-  };
-  this.gridApi.exportDataAsCsv(this.params);
-}
-onGridReady(params) {
-  this.gridApi = params.api;
-  this.gridColumnApi = params.columnApi;
-}
-
-// downloadFile(data: any, type: number, name: string) {
-//   const blob = new Blob([data], {type: 'text/csv'});
-//   const dataURL = window.URL.createObjectURL(blob);
-
-//   // IE doesn't allow using a blob object directly as link href
-//   // instead it is necessary to use msSaveOrOpenBlob
-//   if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-//     window.navigator.msSaveOrOpenBlob(blob);
-//     return;
-//   }
-
-//   const link = document.createElement('a');
-//   link.href = dataURL;
-//   link.download = 'export file.csv';
-//   link.click();
-
-//   setTimeout(() => {
-
-//     // For Firefox it is necessary to delay revoking the ObjectURL
-//     window.URL.revokeObjectURL(dataURL);
-//     }, 100);
-//   }
-
-
-
-
-// download(){
-
-//   this.headers = new Headers({});
-//   this.headers.append('Authorization', this.storageSvc.getUserToken());
-//   let ActionUrl = 'http://192.168.1.138:9003/download/?pk=NPChemInfo';
-
-//   this.http.get(ActionUrl , { headers: this.headers }).subscribe(data =>
-//     this.downloadFile(data.text())),
-//     error => console.log(error ),
-//     () => console.info("OK");
-
-//   }
 
 }

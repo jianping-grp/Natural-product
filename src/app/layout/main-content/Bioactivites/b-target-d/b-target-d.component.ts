@@ -17,7 +17,7 @@ export class BTargetDComponent implements OnInit {
   // obj:object;
   // arro=[]
   pageMeta: PageMeta | null;
-  @Input() pageSizeOptions = [5, 10];
+  @Input() pageSizeOptions = [ 10,20,50,100];
   constructor(
     private restservice: RestService,
     private myrouter: ActivatedRoute,
@@ -34,7 +34,7 @@ export class BTargetDComponent implements OnInit {
   getData(page, perPage){
     this.restservice.getDataList(`DerAct/?target_id=${this.result1}`, page, perPage)
     .subscribe(data => {
-      this.arr=data['der_acts'],
+      this.arr=data['der_act2s'],
       this.pageMeta=data['meta']
       console.log(this.arr)
       // for(var i=0;i<data['n_passays'].length;i++){
@@ -50,7 +50,7 @@ export class BTargetDComponent implements OnInit {
   getName(page, perPage){
     this.restservice.getDataList(`TargetInfo/?target_id=${this.result1}`, page, perPage)
     .subscribe(data => {
-    this.namet = data['target_infos'][0]['name'];
+    this.namet = data['target_info2s'][0]['name'];
     console.log(this.namet);
     });
   }

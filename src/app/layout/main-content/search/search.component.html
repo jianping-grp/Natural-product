@@ -168,7 +168,7 @@
       <h6>Structure Type:</h6>
       <mat-radio-group [(ngModel)]="structureType">
         <mat-radio-button *ngFor="let typeEl of structureTypes" [value]="typeEl">
-          {{typeEl | titlecase}}&nbsp;&nbsp;&nbsp;
+          {{typeEl}}&nbsp;&nbsp;&nbsp;
         </mat-radio-button>
       </mat-radio-group>
       <div>
@@ -177,7 +177,7 @@
                     min="0.7" max="1" step="0.01"
                     [(ngModel)]="similarity"
                     [thumbLabel]="true"
-                    [disabled]="structureType === 'substructure'"
+                    [disabled]="structureType === 'Substructure'||structureType === 'MMP'"              
                     #similaritySlider>
         </mat-slider>
         <button

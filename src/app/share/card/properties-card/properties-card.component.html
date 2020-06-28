@@ -20,45 +20,43 @@
     <th>Smiles</th>
     <td class="mdl-data-table__cell--non-numeric">{{moleculeStructure?.canonical_smiles}}</td>
   </tr> -->
-  <tr>
+  <!-- <tr>
     <th>{{arr2?.db_source}}</th>
     <td class="mdl-data-table__cell--non-numeric">
       <a href="{{arr2?.src_compound_url}}" target="_blank"> 
       {{arr2?.src_compound_id}}</a></td>
-  </tr>
+  </tr> -->
   <tr>
     <th>Mol Weight</th>
-    <td class="mdl-data-table__cell--non-numeric">{{arr1?.amw}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.MW}}</td>
   </tr>
   <tr>
     <th>AlogP</th>
-    <td class="mdl-data-table__cell--non-numeric">{{arr1?.slogp}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.ALOGP}}</td>
   </tr>
   <tr>
     <th>HBD</th>
-    <td class="mdl-data-table__cell--non-numeric">{{arr1?.numhbd}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.HBD}}</td>
   </tr>
   <tr>
     <th>HBA</th>
-    <td class="mdl-data-table__cell--non-numeric">{{arr1?.numhba}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.HBA}}</td>
   </tr>
   <tr>
     <th>PSA</th>
-    <td class="mdl-data-table__cell--non-numeric">{{arr1?.tpsa}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.PSA}}</td>
   </tr>
   <tr>
     <th>RTB</th>
-    <td class="mdl-data-table__cell--non-numeric">{{arr1?.numrotatablebonds}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.ROTB}}</td>
   </tr>
   <tr>
-    <th>Targets</th>
+    <!-- <th>Targets</th>
     <td class="mdl-data-table__cell--non-numeric">
       <button mat-button color="primary" (click)="goTargetList(); close()">
         {{pageMeta?.total_results}}
       </button>
-      <!-- <a [routerLink]="['/target-table/?database_id='+moleculeStructure.database_id]" routerLinkActive="router-link-active">{{pageMeta.total_results}}</a> -->
-
-    </td>
+    </td> -->
   </tr>
 </table>
 </div>

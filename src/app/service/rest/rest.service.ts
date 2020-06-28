@@ -39,7 +39,7 @@ export class RestService {
     return this.http.get(`${this.restHost}/${url}&page=${page}&size=${perPage}`)
 };
 registry(body: any) {
-  return this.http.post(`${this.restHost}/registers/`, body);
+  return this.http.post(`${this.restHost}/TargetPrediction/`, body);
 }
 login(username: string, password: string): Observable<any> {
   return this.http.post(`${this.restHost}/rest-auth/login/`, {username: username, password: password})
@@ -74,6 +74,12 @@ logout(): void {
     return this.http.post(`${this.restHost}/target-prediction/${includeParam}`, body)
       .finally(() => this.globalService.setLoading(false))
       .catch(this.handleError);
+  }
+  userFeedback(body: any) {
+    this.globalService.setLoading(true);
+    return this.http.post(`${this.restHost}/feedback/`, body)
+      .finally(() => this.globalService.setLoading(false))
+      .catch(this.handleError)
   }
   
   private handleError(error: HttpErrorResponse | any ) {

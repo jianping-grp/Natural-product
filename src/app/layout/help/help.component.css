@@ -1,0 +1,10 @@
+.text-position {
+    text-align: center;
+  }
+  .layout{
+      width:80%;
+      margin:0 auto;
+  }
+  p{
+    font-size:20px;
+  }

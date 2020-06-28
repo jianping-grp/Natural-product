@@ -25,18 +25,18 @@ export class ChemicalScreeningComponent implements OnInit {
   });
   ngOnInit() {
     this.createForm();
-    this._getTargetName();
+    // this._getTargetName();
   }
 
-  private _getTargetName() {
-    this.rest.getDataList(`target/?exclude[]=*&include[]=protein_description` +
-      `&include[]=chemblid&sort[]=protein_description`, 0, 999999)
-      .subscribe(data => {
-        this.targets = data['targets'];
-        this.targets.unshift({ chemblid: 'All', protein_description: 'All'});
-        console.log(this.targets.length, this.targets)
-      })
-  }
+  // private _getTargetName() {
+  //   this.rest.getDataList(`target/?exclude[]=*&include[]=protein_description` +
+  //     `&include[]=chemblid&sort[]=protein_description`, 0, 999999)
+  //     .subscribe(data => {
+  //       this.targets = data['targets'];
+  //       this.targets.unshift({ chemblid: 'All', protein_description: 'All'});
+  //       console.log(this.targets.length, this.targets)
+  //     })
+  // }
   createForm() {
     this.chemicalScreeningForm = new FormGroup({
       queryFile: new FormControl('',),

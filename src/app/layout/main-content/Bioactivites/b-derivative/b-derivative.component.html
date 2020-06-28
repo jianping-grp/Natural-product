@@ -6,6 +6,8 @@
     <th>Bioactivites</th>
     <!--<th>pChembl value</th>-->
     <th>Value</th>
+    <th>Assay Id</th>
+    <th>Doc Id</th>
   </tr>
   <tr *ngFor='let ar of arr'>
     <td> 
@@ -14,24 +16,32 @@
     </td>
     <td>
       <ng-container>
-          <p>{{ar?.standard_type}}&nbsp;&nbsp;&nbsp;</p>
+          <p>{{ar?.activity_type}}&nbsp;&nbsp;&nbsp;</p>
         </ng-container>
   </td>
   <td>
   <ng-container >
-      <p>{{ar?.standard_value}}
-        ({{ar?.standard_units}})
+      <p>{{ar?.der_activity_value}}
         <!-- <a href="https://doi.org/{{ar?.doc_doi}}" target="_blank">{{ar?.reference}}</a> -->
           <!-- <button mat-button color="primary" (click)="openDocDialog(mole?.id)">(Detail)</button> -->
       </p>
     </ng-container>
   </td>
+  <td>
+    <ng-container>
+        <p><a href="{{ar?.assay_url}}" target="_blank">{{ar?.assay_id}}</a>&nbsp;&nbsp;&nbsp;</p>
+      </ng-container>
+</td>
+<td>
+  <ng-container>
+      <p><a href="https://www.ebi.ac.uk/chembl/document_report_card/{{ar?.doc_id}}" target="_blank">
+        {{ar?.doc_id}}  </a>&nbsp;&nbsp;&nbsp;</p>
+    </ng-container>
+</td>
   </tr>
 </table>
 <div>
     <div class="mdl-grid mdl-grid--no-spacing">
-      <div class="mdl-cell mdl-cell--3-col">
-      </div>
       <div class="mdl-cell mdl-cell--5-col">
         <mat-paginator [length]="pageMeta?.total_results"
                        [pageSize]="pageMeta?.per_page"
@@ -41,4 +51,4 @@
         </mat-paginator>
       </div>
     </div>
-  </div>
+</div>

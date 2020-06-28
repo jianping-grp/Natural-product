@@ -4,13 +4,8 @@
     <th>Target Name</th>
     <th class="mdl-data-table__cell--non-numeric">
         {{targetinf?.name}}
-
     </th>
   </tr>
-  <!-- <tr>
-    <th>Smiles</th>
-    <td class="mdl-data-table__cell--non-numeric">{{moleculeStructure?.canonical_smiles}}</td>
-  </tr> -->
   <tr>
     <th>Uniprot Id</th>
     <td class="mdl-data-table__cell--non-numeric">{{targetinf?.uniprot_id}}</td>
@@ -31,29 +26,6 @@
     <th>Target Type</th>
     <td class="mdl-data-table__cell--non-numeric">{{targetinf?.type}}</td>
   </tr>
-  <!-- <tr>
-    <th>HBD</th>
-    <td class="mdl-data-table__cell--non-numeric">{{moleculeStructure?.numhbd}}</td>
-  </tr>
-  <tr>
-    <th>HBA</th>
-    <td class="mdl-data-table__cell--non-numeric">{{moleculeStructure?.numhba}}</td>
-  </tr>
-  <tr>
-    <th>PSA</th>
-    <td class="mdl-data-table__cell--non-numeric">{{moleculeStructure?.tpsa}}</td>
-  </tr>
-  <tr>
-    <th>RTB</th>
-    <td class="mdl-data-table__cell--non-numeric">{{moleculeStructure?.numrotatablebonds}}</td>
-  </tr>
-  <tr>
-    <th>Targets</th>
-    <td class="mdl-data-table__cell--non-numeric">
-<a [routerLink]="['/target-table/?database_id='+moleculeStructure.database_id]" routerLinkActive="router-link-active">{{pageMeta.total_results}}</a>
-
-    </td>
-  </tr> -->
 </table>
 <div mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>Close</button>

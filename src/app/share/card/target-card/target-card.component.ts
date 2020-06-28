@@ -21,21 +21,15 @@ export class TargetCardComponent implements OnInit {
   ngOnInit() {
     this.rest.getDataList(`TargetInfo/?tid=${this.data.moleculeChemblId}`)
     .subscribe(data => {
-      this.targetinf = data['target_infos'][0];
+      this.targetinf = data['target_info2s'][0];
       console.log(this.targetinf);
     });
-    // this.rest.getDataList(`NPidinotherdatabase/?database_id=${this.data.moleculeChemblId}`)
-    // .subscribe(data => {
-    //   this.arr1 = data['n_pidinotherdatabases'][0];
-    //   console.log(this.arr1);
-    // });
-    // this.getNum(0,10)
   }
-  getNum(page,perPage){
-    this.rest.getDataList(`NPDtargetinfo/?database_id=${this.data.moleculeChemblId}`, page, perPage)
-    .subscribe(data => {
-      this.pageMeta=data['meta']
-      console.log(this.pageMeta);
-  })}
+  // getNum(page,perPage){
+  //   this.rest.getDataList(`NPDtargetinfo/?database_id=${this.data.moleculeChemblId}`, page, perPage)
+  //   .subscribe(data => {
+  //     this.pageMeta=data['meta']
+  //     console.log(this.pageMeta);
+  // })}
 
 }

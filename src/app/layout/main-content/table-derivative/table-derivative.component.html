@@ -6,7 +6,7 @@
   </div>
 </div>
 <!--表格-->
-<a href="http://192.168.1.138:9003/download/?pk=NPChemInfo" class='down' download="文件名.csv"><h5>Click on the download</h5></a> 
+<a href="http://192.168.1.138:9003/download/?pk=DerChemInfo" class='down' download="文件名.csv"><h5>Click on the download</h5></a> 
 <div  class = 'example-container mat-elevation-z8' > 
   <table mat-table [dataSource]="images" 
   matSort
@@ -26,60 +26,61 @@
     <ng-container matColumnDef="Database Id" >
       <th mat-header-cell *matHeaderCellDef> Database Id </th>
       <td mat-cell *matCellDef="let element"> 
-      <a  [routerLink]="['/compound/'+element.der_id]" target="_blank" routerLinkActive="router-link-active">{{element.der_id}}</a> </td>
+      <a  [routerLink]="['/Derivative/'+element.der_id]" target="_blank" routerLinkActive="router-link-active">{{element.der_id}}</a> </td>
       
     </ng-container>
-    <!-- <ng-container matColumnDef="Synonyms">
+    <ng-container matColumnDef="Synonyms">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Synonyms</th>
       <td mat-cell *matCellDef="let element">
         {{element.synonyms}} </td>
-    </ng-container> -->
+    </ng-container>
     <ng-container matColumnDef="Slogp">
-      <th mat-header-cell *matHeaderCellDef > Slogp </th>
-      <td mat-cell *matCellDef="let element"> {{element.slogp}} </td>
+      <th mat-header-cell *matHeaderCellDef > Alogp </th>
+      <td mat-cell *matCellDef="let element"> {{element.ALOGP}} </td>
     </ng-container>
     <ng-container matColumnDef="Mol Weight">
       <th mat-header-cell *matHeaderCellDef > Mol Weight</th>
-      <td mat-cell *matCellDef="let element"> {{element.amw}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.MW}} </td>
     </ng-container>
     <ng-container matColumnDef="HBA">
       <th mat-header-cell *matHeaderCellDef> HBA</th>
-      <td mat-cell *matCellDef="let element"> {{element.numhba}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.HBA}} </td>
     </ng-container>
     <ng-container matColumnDef="HBD">
       <th mat-header-cell *matHeaderCellDef> HBD</th>
-      <td mat-cell *matCellDef="let element"> {{element.numhbd}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.HBD}} </td>
     </ng-container>
     <ng-container matColumnDef="Numrotatablebonds">
       <th mat-header-cell *matHeaderCellDef> Numrotatablebonds</th>
-      <td mat-cell *matCellDef="let element"> {{element.numrotatablebonds}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.ROTB}} </td>
+    </ng-container>
+    <ng-container matColumnDef="PSA">
+      <th mat-header-cell *matHeaderCellDef> PSA</th>
+      <td mat-cell *matCellDef="let element"> {{element.PSA}} </td>
+    </ng-container>
+    <ng-container matColumnDef="AROM">
+      <th mat-header-cell *matHeaderCellDef> AROM</th>
+      <td mat-cell *matCellDef="let element"> {{element.AROM}} </td>
+    </ng-container>
+      <ng-container matColumnDef="ALERTS">
+      <th mat-header-cell *matHeaderCellDef> ALERTS</th>
+      <td mat-cell *matCellDef="let element"> {{element.ALERTS}} </td>
+    </ng-container>
+    <ng-container matColumnDef="qed">
+      <th mat-header-cell *matHeaderCellDef> QED</th>
+      <td mat-cell *matCellDef="let element"> {{element.qed}} </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-<!-- <div  class = 'example-container mat-elevation-z8' > 
-  <div class="topContainer" >
-    <label> File Name: <input type="text" matInput id="fileName" placeholder="export" [(ngModel)]="fileName1"/> </label>
-    <label> Sheet Name: <input type="text" matInput id="sheetName" placeholder="ag-grid" maxlength="31" [(ngModel)]="sheetName1" /> </label>
-    <label> <button mat-raised-button color="primary"(click)="onBtExport()">Export to Csv</button> </label>
-  </div>
-
-  <ag-grid-angular 
-    #agGrid
-    style="width: 100%; height: 550px;"
-    class="ag-theme-material ag-row-hover"
-    [rowData]="images"
-    [columnDefs]="columnDefs"
-    [suppressHorizontalScroll]='true'
-    (rowClicked)="cellClicked($event)"
-    (gridReady)="onGridReady($event)"
-    [suppressCellSelection]='true'
-    [suppressRowClickSelection]='true'
-    (onSortChanged)='sortchanged($event)'
-    >
-  </ag-grid-angular>
-</div> -->
 <div class="mdl-cell mdl-cell--12-col">
+  <mat-form-field class="mdl-cell mdl-cell--2-col">
+    <mat-select placeholder="Custom displayed columns" multiple [(ngModel)]="displayedColumns">
+      <mat-option *ngFor="let column of allColumns" [value]="column">
+        {{column}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-paginator [length]="pageMeta.total_results"
          [pageSize]="pageMeta.per_page"
          [pageSizeOptions]="pageSizeOptions"

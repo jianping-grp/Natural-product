@@ -22,15 +22,16 @@ export class DetailsComponent implements OnInit {
   para1:string;
   count;
   size;
+  meta:PageMeta[];
   //  可导出表格参数
-  params;
-  private gridApi;
-  private gridColumnApi;
-  paginationPageSize=10;
-  paginationGetRowCount;
-  paginationGetTotalPages;
-  fileName1;
-  sheetName1;
+  // params;
+  // private gridApi;
+  // private gridColumnApi;
+  // paginationPageSize=10;
+  // paginationGetRowCount;
+  // paginationGetTotalPages;
+  // fileName1;
+  // sheetName1;
   @ViewChild('agGrid') agGrid: AgGridAngular;
   
   columnDefs = [
@@ -44,6 +45,7 @@ export class DetailsComponent implements OnInit {
   ];
   result1: string;
   // 分页
+  pageMeta:  PageMeta | null;
   pageMeta2: PageMeta | null;
   pageMeta3: PageMeta | null;
   pageMeta4: PageMeta | null;
@@ -72,7 +74,9 @@ export class DetailsComponent implements OnInit {
   // @Input() displayedColumns = [];
   toppingList: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
   displayedColumns: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
-  displayedColumnsb: string[] = ['Structure', 'MMP', 'Pubmed Id','Np Activity Value','Der Activity Value','Activity Type'];
+  displayedColumnsb: string[] = ['Derivative Id','Structure', 'MMP','tid', 'Pubmed Id','Np Activity Value',];
+  displayedColumnsc: string[] = ['Derivative Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA',];
+  allColumns:string[] = ['Derivative Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
   @ViewChild('click') click:ElementRef;
   @Input() result1$: Observable<string>;
   @Input() pageSizeOptions = [ 10,20,50,100];
@@ -218,7 +222,7 @@ export class DetailsComponent implements OnInit {
     private _getDrugs(page?, perPage?) {
         this.restservice.getDataList(`NPChemInfo/?np_id=${this.result1}`, page, perPage)
         .subscribe(data => {
-          this.arr = data['np_chem_infos'][0];
+          this.arr = data['np_chem_info2s'][0];
           console.log(this.arr);
         });
         this.restservice.getDataList(`NPIdOtherdb/?np_id=${this.result1}`, page, perPage)
@@ -269,7 +273,7 @@ export class DetailsComponent implements OnInit {
     private _getDrugsa(page?, perPage?) {
       this.restservice.getDataList(`TargetInfoNP/?np_id=${this.result1}`, page, perPage)
       .subscribe(data => {
-        this.arra = data['target_info_nps']
+        this.arra = data['target_info_np2s']
         console.log(this.arra);
         this.total_results=data['meta']['total_results']
         console.log(this.pageMeta4)
@@ -281,12 +285,12 @@ export class DetailsComponent implements OnInit {
 }
 获取当前衍生物的相关化合物
 private _getDrugsb(page?, perPage?) {
-  this.restservice.getDataList(`Derdetails/?pk=${this.result1}`, page, perPage)
+  this.restservice.getDataList(`MMPND/?mol_id1=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.images=data['results'],
-      this.count=data['count'],
-      this.size=this.images.length-1;
-      this.size=this.size+1
+      this.images=data['mmpnds'],
+      this.pageMeta=data['meta'],
+      // this.size=this.images.length-1;
+      // this.size=this.size+1
       // this.count=this.count*this.size
       console.log(this.images)
   });
@@ -325,26 +329,5 @@ private _getDrugsb(page?, perPage?) {
   }
   pageChanges(event) {
     this._getDrugsb( event.pageIndex, event.pageSize);
-  }
-  // 点击跳转靶点详情页面
-  cellClicked(params){
-    this.myRouter.navigateByUrl(`target/${params.data.tid}`)
-    console.log(params)
-  }
-  sortchanged(params){
-    // console.log(params)
-  }
-  //  导出CSV
-  onBtExport() {
-    this.params = {
-      fileName: this.fileName1,
-      sheetName: this.sheetName1
-    };
-    this.gridApi.exportDataAsCsv(this.params);
-  }
-    //  生成可导出表格
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
   }
 }

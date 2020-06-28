@@ -1,0 +1,145 @@
+<h3 class="text-position">MMP Search Results</h3>
+<h4>Related Compounds and Derivatives MMP Information</h4>
+<table mat-table [dataSource]="images" 
+matSort
+
+
+class="mat-elevation-z8">
+<ng-container matColumnDef="Derivative Id">
+  <th mat-header-cell *matHeaderCellDef > Derivative Id </th>
+  <td mat-cell *matCellDef="let element">
+  <a  [routerLink]="['/Derivative/'+element.mol_id1]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id1}}</a> </td>
+</ng-container>
+<ng-container matColumnDef="Compound Id">
+	<th mat-header-cell *matHeaderCellDef > Compound Id </th>
+	<td mat-cell *matCellDef="let element">
+	<a  [routerLink]="['/compound/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> </td>
+  </ng-container>
+<ng-container matColumnDef="Structure">
+  <th mat-header-cell *matHeaderCellDef> Core structure</th>
+  <td mat-cell *matCellDef="let element">
+    <app-jsme [elementId]="element?.id+'core'"
+    [width]="'100px'"
+    [height]="'160px'"
+    [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+    [molString]="element?.core | toR"
+></app-jsme></td>
+</ng-container>
+
+  <ng-container matColumnDef="MMP">
+    <th mat-header-cell *matHeaderCellDef >Transformation</th>
+    <td mat-cell *matCellDef="let element">    <app-jsme [elementId]="element?.id+'mmp'"
+      [width]="'200px'"
+      [height]="'160px'"
+      [option]="'reaction depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element?.mmp | toR"
+  ></app-jsme></td>
+  </ng-container>
+  <!-- <ng-container matColumnDef="tid">
+    <th mat-header-cell *matHeaderCellDef > Target Id </th>
+    <td mat-cell *matCellDef="let element">
+    <a  [routerLink]="['/target/'+element.tid]" target="_blank" routerLinkActive="router-link-active">{{element.tid}}</a> </td>
+  </ng-container> -->
+  <ng-container matColumnDef="Pubmed Id">
+    <th mat-header-cell *matHeaderCellDef> Assay Id</th>
+    <td mat-cell *matCellDef="let element"><a href="{{element.assay_url}}" target="_blank">
+		{{element.assay_id}}  </a>  </td>
+  </ng-container>
+  <ng-container matColumnDef="Np Activity Value">
+    <th mat-header-cell *matHeaderCellDef> Doc Id</th>
+    <td mat-cell *matCellDef="let element"> <a href="https://www.ebi.ac.uk/chembl/document_report_card/{{element.doc_id}}" target="_blank">
+      {{element.doc_id}}  </a> </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsb;sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsb;"></tr>
+</table>
+<div class="mdl-cell mdl-cell--12-col">
+  <mat-paginator [length]="count"
+  [pageSize]="10"
+  [pageSizeOptions]="[10]"
+  (page)="pageChange($event)"
+></mat-paginator></div>
+
+<h4>Transformation Information</h4>
+<table mat-table [dataSource]="images" 
+matSort
+
+
+class="mat-elevation-z8">
+<ng-container matColumnDef="Derivative Id">
+  <th mat-header-cell *matHeaderCellDef > Derivative Id </th>
+  <td mat-cell *matCellDef="let element">
+  <a  [routerLink]="['/Derivative/'+element.mol_id1]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id1}}</a> </td>
+</ng-container>
+<ng-container matColumnDef="Compound Id">
+	<th mat-header-cell *matHeaderCellDef > Compound Id </th>
+	<td mat-cell *matCellDef="let element">
+	<a  [routerLink]="['/compound/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> </td>
+  </ng-container>
+<ng-container matColumnDef="activity_type">
+  <th mat-header-cell *matHeaderCellDef> Activity Type</th>
+  <td mat-cell *matCellDef="let element"> {{element.activity_type}} </td>
+</ng-container>
+
+  <ng-container matColumnDef="activity_value">
+    <th mat-header-cell *matHeaderCellDef >Activity Value</th>
+    <td mat-cell *matCellDef="let element"> {{element.activity_value}} </td>
+  </ng-container>
+  <ng-container matColumnDef="MW">
+    <th mat-header-cell *matHeaderCellDef> MW</th>
+    <td mat-cell *matCellDef="let element"> {{element.MW}} </td>
+  </ng-container>
+  <ng-container matColumnDef="PSA">
+    <th mat-header-cell *matHeaderCellDef> PSA</th>
+    <td mat-cell *matCellDef="let element"> {{element.PSA}} </td>
+  </ng-container>
+  <ng-container matColumnDef="ALOGP">
+    <th mat-header-cell *matHeaderCellDef > ALOGP </th>
+    <td mat-cell *matCellDef="let element"> {{element.ALOGP}} </td>
+  </ng-container>
+  <ng-container matColumnDef="HBD">
+    <th mat-header-cell *matHeaderCellDef > HBD </th>
+    <td mat-cell *matCellDef="let element"> {{element.HBD}} </td>
+  </ng-container>
+  <ng-container matColumnDef="HBA">
+    <th mat-header-cell *matHeaderCellDef> HBA</th>
+    <td mat-cell *matCellDef="let element"> {{element.HBA}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ROTB">
+    <th mat-header-cell *matHeaderCellDef> ROTB</th>
+    <td mat-cell *matCellDef="let element"> {{element.ROTB}} </td>
+  </ng-container>
+  <ng-container matColumnDef="AROM">
+    <th mat-header-cell *matHeaderCellDef> AROM</th>
+    <td mat-cell *matCellDef="let element"> {{element.AROM}} </td>
+  </ng-container>
+    <ng-container matColumnDef="ALERTS">
+    <th mat-header-cell *matHeaderCellDef> ALERTS</th>
+    <td mat-cell *matCellDef="let element"> {{element.ALERTS}} </td>
+  </ng-container>
+  <ng-container matColumnDef="qed">
+    <th mat-header-cell *matHeaderCellDef> QED</th>
+    <td mat-cell *matCellDef="let element"> {{element.qed}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsc;sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsc;"></tr>
+</table>
+
+<div class="mdl-cell mdl-cell--12-col">
+	<mat-form-field class="mdl-cell mdl-cell--2-col">
+        <mat-select placeholder="Custom displayed columns" multiple [(ngModel)]="displayedColumnsc">
+          <mat-option *ngFor="let column of allColumns" [value]="column">
+            {{column}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+	  <div class="mdl-cell mdl-cell--12-col">
+		<mat-paginator [length]="count"
+			   [pageSize]="10"
+			   [pageSizeOptions]="[10]"
+			   (page)="pageChange($event)"
+		></mat-paginator>
+    </div>
+  </div>

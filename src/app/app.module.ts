@@ -33,6 +33,9 @@ import { TPResultComponent } from './layout/main-content/t-p-result/t-p-result.c
 import { DerivativeComponent } from './layout/main-content/derivative/derivative.component';
 import { TableDerivativeComponent } from './layout/main-content/table-derivative/table-derivative.component';
 import { BTargetDComponent } from './layout/main-content/Bioactivites/b-target-d/b-target-d.component';
+import { ToRPipe } from './share/pipe/to-r.pipe';
+import { SearchMmpComponent } from './layout/main-content/search-mmp/search-mmp.component';
+import { HelpComponent } from './layout/help/help.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +59,10 @@ import { BTargetDComponent } from './layout/main-content/Bioactivites/b-target-d
     TPResultComponent,
     DerivativeComponent,
     TableDerivativeComponent,
-    BTargetDComponent
+    BTargetDComponent,
+    ToRPipe,
+    SearchMmpComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

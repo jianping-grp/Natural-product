@@ -14,7 +14,7 @@ export class BCompoundComponent implements OnInit {
   result1 = 'NP332203';
   name = '';
   pageMeta: PageMeta | null;
-  @Input() pageSizeOptions = [5, 10];
+  @Input() pageSizeOptions = [ 10,20,50,100];
   constructor(
     private restservice: RestService,
     public dialog: MatDialog,
@@ -27,25 +27,25 @@ export class BCompoundComponent implements OnInit {
       this.getData(0,10)
       this.getName(0,10)
     }
-getData(page, perPage){
+  getData(page, perPage){
   this.restservice.getDataList(`NPAct/?np_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.arr=data['np_acts'],
+      this.arr=data['np_act2s'],
       this.pageMeta=data['meta']
-      console.log(this.arr)
-  });
-}
-getName(page, perPage){
+       console.log(this.arr)
+   });
+  }
+  getName(page, perPage){
   this.restservice.getDataList(`NPChemInfo/?np_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-    this.name = data['np_chem_infos'][0]['synonyms'];
+    this.name = data['np_chem_info2s'][0]['synonyms'];
     console.log(this.name);
   });
-}
-pageChange(event) {
+  }
+  pageChange(event) {
   this.getData( event.pageIndex, event.pageSize);
-}
-openMoleculePropertiesDialog(moleculeChemblId: number | string) {
+  }
+  openMoleculePropertiesDialog(moleculeChemblId: number | string) {
   this.dialog.open(TargetCardComponent, {
     width: '800px',
     data: {
