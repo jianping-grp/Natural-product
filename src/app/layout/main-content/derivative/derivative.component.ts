@@ -70,9 +70,9 @@ export class DerivativeComponent implements OnInit {
   // @Input() displayedColumns = [];
   displayedColumns: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
   
-  displayedColumnsb: string[] = ['Compound Id','Structure', 'MMP','tid', 'Pubmed Id','Np Activity Value',];
-  displayedColumnsc: string[] = ['Compound Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA',];
-  allColumns:string[] = ['Compound Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
+  displayedColumnsb: string[] = ['Natural Product Id','Structure', 'MMP', 'Assay Id','Doc Id','PSA','ALOGP','MW'];
+  // displayedColumnsc: string[] = ['Compound Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA',];
+  allColumns:string[] = ['Natural Product Id','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
   @ViewChild('click') click:ElementRef;
   @Input() result1$: Observable<string>;
   @Input() pageSizeOptions = [10,20,50,100];
@@ -223,21 +223,38 @@ export class DerivativeComponent implements OnInit {
 
           console.log(this.arr);
         });
-        // this.restservice.getDataList(`DerIdOtherdb/?der_id=${this.result1}`, page, perPage)
-        // .subscribe(data => {
-        //   this.arr1 = data['der_id_otherdbs'][0];
-        //   this.arr2= data['der_id_otherdbs'][1];
-        //   this.source=data['der_id_otherdbs'][0]['db_source'].toUpperCase()
-        //   this.source2=data['der_id_otherdbs'][1]['db_source'].toUpperCase()
-        //   // this.arr3= data['der_id_otherdbs'][2];
-        //   console.log(this.arr1);
-        // });
+        this.restservice.getDataList(`DerIdOtherdb/?der_id=${this.result1}`, page, perPage)
+        .subscribe(data => {
+          this.arr1 = data['der_id_otherdbs'][0];
+          this.arr2= data['der_id_otherdbs'][1];
+          this.source=data['der_id_otherdbs'][0]['db_source'].toUpperCase()
+          this.source2=data['der_id_otherdbs'][1]['db_source'].toUpperCase()
+          // this.arr3= data['der_id_otherdbs'][2];
+          console.log(this.arr1);
+        });
 // 获取当前衍生物的化合物
         this.restservice.getDataList(`NPder/?der_id=${this.result1}`, page, perPage)
         .subscribe(data => {
-          this.arr3 = data['n_pders'];
-          this.pageMeta3 = data['meta'];
-          console.log(this.arr3);
+          // this.arr3 = data['n_pders'];
+          // this.pageMeta3 = data['meta'];
+          // console.log(this.arr3);
+                    // this.pageMeta3 = data['meta'];
+                    this.arr3 = data['n_pders'];
+                    for(var i=0;i<=data['meta']['total_pages']-1;i++){
+                     
+                      this.restservice.getDataList(`NPder/?der_id=${this.result1}`, page, perPage)
+                      .subscribe(data => {
+                        for(var i=0;i<data['n_pders'].length;i++){
+                          this.arr3.push(data['n_pders'][i])
+                        }
+                        
+                      })
+                      page = +(page) + 1;
+                     
+                    }
+                    this.pageMeta3 = data['meta'];
+                    console.log('zaizheaaaaaaaa')
+                    console.log(this.arr3);                   
         });
         this.restservice.getDataList(`DerAct/?der_id=${this.result1}`, page, perPage)
         .subscribe(data => {

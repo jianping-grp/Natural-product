@@ -77,7 +77,7 @@ logout(): void {
   }
   userFeedback(body: any) {
     this.globalService.setLoading(true);
-    return this.http.post(`${this.restHost}/feedback/`, body)
+    return this.http.post(`${this.restHost}/Contact/`, body)
       .finally(() => this.globalService.setLoading(false))
       .catch(this.handleError)
   }

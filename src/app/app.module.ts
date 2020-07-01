@@ -36,6 +36,7 @@ import { BTargetDComponent } from './layout/main-content/Bioactivites/b-target-d
 import { ToRPipe } from './share/pipe/to-r.pipe';
 import { SearchMmpComponent } from './layout/main-content/search-mmp/search-mmp.component';
 import { HelpComponent } from './layout/help/help.component';
+// import {NgxLoadingModule} from 'ngx-loading';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { HelpComponent } from './layout/help/help.component';
   ],
   imports: [
     BrowserModule,
+    // NgxLoadingModule.forRoot({}),
     AppRoutingModule,
     JsmeModule,
     BrowserAnimationsModule,

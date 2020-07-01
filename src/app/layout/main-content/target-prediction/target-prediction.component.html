@@ -47,7 +47,9 @@
       <li>Both 2D and 3D structures can be used in the input file</li>
       <li>Only 1000 molecules can be predicted at a time,
         Do not submit files with more than 1000 molecules</li>
-      <li>Chemical screening results will be sent to your email</li>
+      <li>A multi-voting similarity ensemble approach (MV-SEA)1 is used here to predict potential targets for molecules</li>
+      <li>Target prediction results will be sent to your email</li>
+      
     </ul>
     <h5>Email Address:</h5>
 <div class="form-group">
@@ -65,7 +67,7 @@
       color="primary"
       
       [disabled]="chemicalScreeningForm.invalid"
-    >Target Prediction
+    >Target Prediction（MV-SEA）
     </button>
   </div>
 </div>
@@ -106,3 +108,4 @@
 </form>
 </div>
 </div>
+<div class='footer'>1. Wang,Z., Liang,L., Yin,Z. and Lin,J. (2016) Improving chemical similarity ensemble approach in target prediction. J. Cheminform., 8, 20. </div>

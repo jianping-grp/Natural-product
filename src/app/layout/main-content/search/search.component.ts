@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
   structureType = this.structureTypes[0];
   similarity = 0.9;
   drugSearchTypeList = [
-    {inputType: 'Compounds name', value: 'AC1OEVSY'},
+    {inputType: 'Natural Product name', value: 'AC1OEVSY'},
     {inputType: 'Database Id', value: 'NP000002'},
   ];
   drugSelectedType = this.drugSearchTypeList[0].inputType;
@@ -84,7 +84,7 @@ export class SearchComponent implements OnInit {
 
   drugSubmit() {
     this.drugKeyword = this.drugKeyword.trim();
-    if (this.drugSelectedType === 'Compounds name') {
+    if (this.drugSelectedType === 'Natural Product name') {
       this.drugKeyword='?search='+this.drugKeyword
       this.router.navigate(['/compound-table/', this.drugKeyword])
     } else if (this.drugSelectedType === 'Database Id') {

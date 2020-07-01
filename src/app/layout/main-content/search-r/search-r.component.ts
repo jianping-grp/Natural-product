@@ -20,6 +20,7 @@ export class SearchRComponent implements OnInit {
   drugDisplayedColumns = ['structure', 'database_id',  'amw', 'slogp', 'tpsa', 'numrotatablebonds', 'numhbd', 'numhba'];
   constructor(
     private myrouter: ActivatedRoute,
+    private router:Router,
     private restservice: RestService ,
   ) { 
     
@@ -129,4 +130,25 @@ export class SearchRComponent implements OnInit {
 
   });
 }
+ tiaozhuan(id){
+   console.log(id)
+  if(id.indexOf("N")!==-1){
+    // this.restservice.getDataList(`NPChemInfo/?np_id=${this.id1}`)
+    //   .subscribe(data => {
+    //     this.obj = data['np_chem_info2s'][0];
+    //       // if(this.obj['name'].indexOf("N")!=-1){          
+    //     this.images.push(this.obj)
+    //   })
+        this.router.navigate(['/compound/',id])
+    }
+    else{
+          // this.restservice.getDataList(`DerChemInfo/?der_id=${this.id1}`)
+          // .subscribe(data => {
+          //   this.obj = data['der_chem_info2s'][0];
+          //   this.obj['np_id']=this.obj['der_id']
+          //   this.images.push(this.obj) 
+          //               })
+          this.router.navigate(['/Derivative/',id])
+          }
+ }
 }

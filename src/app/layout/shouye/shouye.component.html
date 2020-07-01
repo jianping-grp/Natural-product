@@ -1,13 +1,15 @@
 <div class='zhongjian'>
   <div class='zhongbu'>     
     <div class="row">
+ 
       <div class="col-lg-6">
-          <h2 style='color:wheat'>what are you looking for?</h2>
-          <img  class='lhp'src='../../../assets/11111.png'>
+          <!-- <h2 style='color:wheat'>what are you looking for?</h2> -->
+          <h3 style='color:wheat'>MMP-NPD：A Matched Molecular Pairs Database for Natural Products and their Derivatives</h3> 
+          <!-- <img  class='lhp'src='../../../assets/11111.png'> -->
           <mat-tab-group [color]='color' [backgroundColor]='color2' headerPosition="below">transparent
-            <mat-tab label="Compounds" >        
+            <mat-tab label="Natural Product" >        
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Compounds name" #content>
+                <input type="text" class="form-control" placeholder="Natural Product name" #content>
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button"  (click)="chazhao()">Search</button>
                 </span>
@@ -35,6 +37,7 @@
     </div><!-- /.row -->
   </div>
 </div>
+<div class='tu'>
 <div class='data'>
   <div class='circle' style="background-color: rgb(29, 182, 182);">
     <p class='wz'>
@@ -44,33 +47,37 @@
   </div>
   <div class='circle' style="background-color: rgb(124, 38, 204);">
     <p class='wz'>
-      472.3K
-      MMP datas
+      931.4K
+      MMPs
     </p>
   </div>
   <div class='circle' style='background-color: rgb(120, 212, 27);'>
     <p class='wz'>
       766.7K
-      Compounds
+      Natural Products
     </p>
+  </div>
+  <div >
+    <img mat-card-image src="assets/picture/mmp.jpg">
   </div>
   <div class='circle' style="background-color:#FF7799;">
     <p class='wz'>
-      310.6K
+      316.2K
       Derivatives
     </p>
   </div>
   <div class='circle' style='background-color: #004444;'>
     <p class='wz'>
-      762.2K
-      Compounds Activity Datas
+      3758.4K
+      Activity Data
     </p>
   </div>
-  <div class='circle'>
+  <!-- <div class='circle'>
     <p class='wz' >
-      2532.3K
+      2996.1K
       Derivatives Activity Datas
     </p>
-  </div>
+  </div> -->
+</div>
 </div>
 
