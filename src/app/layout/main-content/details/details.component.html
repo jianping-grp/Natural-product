@@ -214,6 +214,16 @@ class="mat-elevation-z8">
   <td mat-cell *matCellDef="let element">
   <a  [routerLink]="['/Derivative/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> </td>
 </ng-container>
+<ng-container matColumnDef="Derivative Structure">
+  <th mat-header-cell *matHeaderCellDef> Natural Product structure</th>
+  <td mat-cell *matCellDef="let element">
+    <app-jsme [elementId]="element?.id+'der'"
+    [width]="'100px'"
+    [height]="'160px'"
+    [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+    [molString]="element.mol_id2_smiles"
+></app-jsme></td>
+</ng-container>
 <ng-container matColumnDef="Structure">
   <th mat-header-cell *matHeaderCellDef> Core structure</th>
   <td mat-cell *matCellDef="let element">

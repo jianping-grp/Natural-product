@@ -28,9 +28,9 @@ export class SearchMmpComponent implements OnInit {
       this._getDrugsb(1);
     });
   }
-  displayedColumnsb: string[] = ['Database Id1','Database Id2','Structure', 'MMP','Assay Id','Doc Id','PSA','ALOGP','MW'];
+  displayedColumnsb: string[] = ['Database Id1','Database Id2','compound1 Structure','compound2 Structure','Structure', 'MMP','Assay Id','activity_type', 'activity_value','ALOGP',];
   // displayedColumnsc: string[] = ['Derivative Id','Compound Id','activity_type', 'activity_value', 'MW','PSA','ALOGP',];
-  allColumns:string[] = ['Database Id1','Database Id2','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
+  allColumns:string[] = ['Database Id1','Database Id2','compound1 Structure','compound2 Structure','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
   获取当前衍生物的相关化合物
   private _getDrugsb(page?, perPage?) {
     this.restservice.getDataList(`MMPSearch/?smile=${this.result1}`, page, perPage)

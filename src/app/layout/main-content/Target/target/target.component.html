@@ -93,16 +93,35 @@ matSort
 
 class="mat-elevation-z8">
 <ng-container matColumnDef="Database Id1">
-  <th mat-header-cell *matHeaderCellDef > Database Id </th>
+  <th mat-header-cell *matHeaderCellDef > Database Id 1 </th>
   <td mat-cell *matCellDef="let element">
   <a  [routerLink]="['/Derivative/'+element.mol_id1]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id1}}</a> </td>
 </ng-container>
 <ng-container matColumnDef="Database Id2">
-	<th mat-header-cell *matHeaderCellDef > Database Id </th>
+	<th mat-header-cell *matHeaderCellDef > Database Id 2 </th>
 	<td mat-cell *matCellDef="let element">
 	<a  [routerLink]="['/compound/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> </td>
   </ng-container>
-
+  <ng-container matColumnDef="compound1 Structure">
+    <th mat-header-cell *matHeaderCellDef> Compound structure 1</th>
+    <td mat-cell *matCellDef="let element">
+      <app-jsme [elementId]="element?.id+'c1'"
+      [width]="'100px'"
+      [height]="'160px'"
+      [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element.mol_id1_smiles"
+  ></app-jsme></td>
+  </ng-container>
+  <ng-container matColumnDef="compound2 Structure">
+    <th mat-header-cell *matHeaderCellDef> Compound structure 2</th>
+    <td mat-cell *matCellDef="let element">
+      <app-jsme [elementId]="element?.id+'c2'"
+      [width]="'100px'"
+      [height]="'160px'"
+      [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element.mol_id2_smiles"
+  ></app-jsme></td>
+  </ng-container>
 <ng-container matColumnDef="Structure">
   <th mat-header-cell *matHeaderCellDef> Core structure</th>
   <td mat-cell *matCellDef="let element">

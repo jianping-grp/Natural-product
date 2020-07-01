@@ -75,9 +75,9 @@ export class DetailsComponent implements OnInit {
   // @Input() displayedColumns = [];
   toppingList: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
   displayedColumns: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
-  displayedColumnsb: string[] = ['Derivative Id','Structure', 'MMP', 'Assay Id','Doc Id','PSA','ALOGP','MW'];
+  displayedColumnsb: string[] = ['Derivative Id','Derivative Structure','Structure', 'MMP', 'Assay Id','activity_type', 'activity_value','ALOGP'];
   // displayedColumnsc: string[] = ['Derivative Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA',];
-  allColumns:string[] = ['Derivative Id','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
+  allColumns:string[] = ['Derivative Id','Derivative Structure','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
   @ViewChild('click') click:ElementRef;
   @Input() result1$: Observable<string>;
   @Input() pageSizeOptions = [ 10,20,50,100];

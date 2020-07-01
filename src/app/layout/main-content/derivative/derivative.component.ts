@@ -70,9 +70,9 @@ export class DerivativeComponent implements OnInit {
   // @Input() displayedColumns = [];
   displayedColumns: string[] = ['Pref Name', 'Target Id', 'Target Type','Target Class','Organism'];
   
-  displayedColumnsb: string[] = ['Natural Product Id','Structure', 'MMP', 'Assay Id','Doc Id','PSA','ALOGP','MW'];
+  displayedColumnsb: string[] = ['Natural Product Id','Natural Product Structure','Structure', 'MMP','Assay Id','activity_type', 'activity_value','ALOGP',];
   // displayedColumnsc: string[] = ['Compound Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA',];
-  allColumns:string[] = ['Natural Product Id','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
+  allColumns:string[] = ['Natural Product Id','Natural Product Structure','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
   @ViewChild('click') click:ElementRef;
   @Input() result1$: Observable<string>;
   @Input() pageSizeOptions = [10,20,50,100];

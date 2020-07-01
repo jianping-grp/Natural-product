@@ -22,9 +22,9 @@ export class TargetComponent implements OnInit {
   shuzu2=[];
   @Input() pageSizeOptions = [ 10,20,50,100];
   @Input() pageSize = 10;
-  displayedColumnsb: string[] = ['Database Id1','Database Id2','Structure', 'MMP','Assay Id','Doc Id','PSA','ALOGP','MW'];
+  displayedColumnsb: string[] = ['Database Id1','Database Id2','compound1 Structure','compound2 Structure','Structure', 'MMP','Assay Id','activity_type', 'activity_value','ALOGP',];
   // displayedColumnsc: string[] = ['Derivative Id','Compound Id','activity_type', 'activity_value', 'MW','PSA','ALOGP',];
-  allColumns:string[] = ['Database Id1','Database Id2','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
+  allColumns:string[] = ['Database Id1','Database Id2','compound1 Structure','compound2 Structure','Structure', 'MMP','Assay Id','Doc Id','activity_type', 'activity_value', 'MW','PSA','ALOGP','HBD','HBA','ROTB','AROM','ALERTS','qed'];
   constructor(private restservice: RestService ,
     private router:Router,
               private myrouter: ActivatedRoute) { }
