@@ -1,0 +1,44 @@
+h2{
+    text-align:center;
+}
+.row-fluid{
+    width:70%;
+    margin:0 auto;
+}
+a{
+    text-decoration:none
+}
+.table{
+    width: 100%;
+}
+.mat-table{
+    width:100%;
+}
+.wrap{
+    width: 670px; 
+    height:auto;
+    max-height: 200px;
+    /* white-space: nowrap;
+    text-overflow: ellipsis; */
+    /* overflow: hidden; */
+    overflow-x: scroll;
+    }
+    .echarts{
+        height:1000px;
+    }
+    .network-table {
+        min-height: 800px;
+      }
+      .mdl-data-table {
+        margin: auto;
+      }
+      
+      .form-width {
+        width: 80px;
+      }
+      
+      .td-width {
+        max-width: 100px;
+        /*justify-content: center;*/
+        /*justify-items: center*/
+      }

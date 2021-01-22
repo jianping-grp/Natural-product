@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router} from '@angular/router';
+import {RestService} from '../../service/rest/rest.service';
 // declare var $: any;
 @Component({
   selector: 'app-shouye',
@@ -15,10 +16,10 @@ export class ShouyeComponent implements OnInit {
   @ViewChild('contentt') contentd: ElementRef;
   @Input() color ='primary';
   @Input() color2 ='primary';
-  constructor(  private router: Router) { }
-  ngOnInit() {
+  constructor(  private restservice: RestService, 
+    private router: Router) { }
+  ngOnInit() { 
   }
-
   chazhao() {
     this.scontent ="?search="+this.content.nativeElement.value;
     // this.restservice.postData('search/', this.scontent).subscribe(data => {console.log(data)})

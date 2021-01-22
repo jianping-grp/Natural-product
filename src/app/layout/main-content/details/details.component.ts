@@ -344,5 +344,5 @@ private _getDrugsb(page?, perPage?) {
   }
   pageChanges(event) {
     this._getDrugsb( event.pageIndex, event.pageSize);
-  }
+  } 
 }

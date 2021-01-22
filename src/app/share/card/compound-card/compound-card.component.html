@@ -1,0 +1,29 @@
+<table class="mdl-data-table mdl-shadow--2dp">
+  <tr>
+    <th>Enlish Name</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.synonyms}}</td>
+  </tr>
+  <tr>
+    <th>Structure</th>
+    <td class="mdl-data-table__cell--non-numeric">
+      <app-jsme [elementId]="'compound_popup'"
+                [width]="'200px'"
+                [height]="'180px'"
+                [option]="'depict nozoom noshowdraganddropsymbolindepictmode useopenchemlib'"
+                [molString]="arr1?.canonical_smiles"
+      ></app-jsme>
+    </td>
+  </tr>
+  <!-- <tr *ngIf="prescriptionId || diseaseId">
+    <th>Network</th>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button mat-button color="primary" (click)="kclose(); gotoCompoundNetwork()">view</button>
+    </td>
+  </tr> -->
+</table>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close (click)='detail($event)'
+         >Detail
+  </button>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</div>

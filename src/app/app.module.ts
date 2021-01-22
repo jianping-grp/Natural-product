@@ -23,6 +23,7 @@ import { BDerivativeComponent } from './layout/main-content/Bioactivites/b-deriv
 import { BTargetComponent } from './layout/main-content/Bioactivites/b-target/b-target.component';
 import { PropertiesCardComponent } from './share/card/properties-card/properties-card.component';
 import { TargetCardComponent } from './share/card/target-card/target-card.component';
+// import { CompoundCardComponent } from './share/card/target-card/target-card.component';
 import { ContactComponent } from './layout/main-content/contact/contact.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { TableCompoundComponent } from './layout/main-content/table-compound/table-compound.component';
@@ -36,6 +37,8 @@ import { BTargetDComponent } from './layout/main-content/Bioactivites/b-target-d
 import { ToRPipe } from './share/pipe/to-r.pipe';
 import { SearchMmpComponent } from './layout/main-content/search-mmp/search-mmp.component';
 import { HelpComponent } from './layout/help/help.component';
+import { AssayComponent } from './layout/main-content/assay/assay.component';
+import { CompoundCardComponent } from './share/card/compound-card/compound-card.component';
 // import {NgxLoadingModule} from 'ngx-loading';
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import { HelpComponent } from './layout/help/help.component';
     BTargetComponent,
     PropertiesCardComponent,
     TargetCardComponent,
+    CompoundCardComponent,
     ContactComponent,
     TableCompoundComponent,
     ChemicalScreeningComponent,
@@ -63,7 +67,8 @@ import { HelpComponent } from './layout/help/help.component';
     BTargetDComponent,
     ToRPipe,
     SearchMmpComponent,
-    HelpComponent
+    HelpComponent,
+    AssayComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,7 @@ import { HelpComponent } from './layout/help/help.component';
     FileUploadModule
 
   ],
-  entryComponents: [PropertiesCardComponent,TargetCardComponent],
+  entryComponents: [PropertiesCardComponent,TargetCardComponent,CompoundCardComponent],
   providers: [
     GlobalService,
     RestService

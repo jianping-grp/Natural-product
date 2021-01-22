@@ -1,0 +1,228 @@
+<h2>Assay Details</h2>
+<hr>
+<div class="container-fluid">
+  <!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+	<div class="row-fluid" >
+	<!--  -->
+		<div class="span12"  >
+			<table class="table table-bordered" *ngFor='let image of images' >
+				<tbody>
+            		<tr class="info">
+                		<td>Assay Id</td>
+                		<td>{{image.assay_id}}</td>
+              		</tr>
+					<tr>
+						<td>Doc Id</td>
+						<td>{{image.doc_id}}</td>
+					</tr>
+					<tr class="success">
+						<td>Description</td>
+						<td>{{image.description}}</td>
+					</tr>
+				
+					<tr class="error">
+						<td>Target Id</td>
+						<td>{{image.target_id}}</td>
+					</tr>
+					<!-- <tr class="warning">
+						<td>Target Uniprot Id</td>
+						<td>
+              <span *ngFor='let sz of shuzu' >
+                <a  href="https://www.uniprot.org/uniprot/{{sz}}" target="_blank" >
+                  {{sz}}</a>
+                </span>
+						</td>
+          </tr> -->
+					<!-- <tr >
+            <td>Gene</td>
+            <td>{{image.gene}}</td>
+          </tr>
+					<tr class="info"> 
+						<td>Target Class</td>
+						<td>{{image.target_class}}</td>
+					</tr>
+
+					<tr class="error">
+						<td>Organism</td>
+						<td>{{image.organism}}</td>
+					</tr>
+					<tr class="success">
+						<td>Target Synonyms</td>
+						<td>{{image.synonyms}}</td>
+					</tr>
+					<tr>
+						<td>Related Molecules</td>
+            <td  >
+              <div class="wrap">
+              <span *ngFor='let sz2 of shuzu2' >
+                <button mat-button color="primary" (click)="tiaozhuan(sz2)">{{sz2}}</button>
+                </span>
+              </div>
+            </td>
+					</tr>	
+					<tr class="warning">
+						<td>Bioactivitles</td>
+						<td>
+							<a  [routerLink]="['/BTarget/'+image.tid]" routerLinkActive="router-link-active">Natural Products&nbsp;&nbsp;Bioactivity({{num}}) </a>
+							
+								<a  [routerLink]="['/BTargetD/'+image.tid]" routerLinkActive="router-link-active">Derivatives&nbsp;&nbsp;Bioactivity({{num1}})</a></td>
+					</tr> -->
+        		</tbody>
+			  </table>
+		</div>
+  </div>
+
+</div>
+<div 
+class="network-table"
+echarts 
+[options]="echartOptions" 
+(chartInit)="onChartInit($event)"
+(chartDblClick)="onDbClick($event)"
+></div>
+<table class="mdl-data-table">
+	<tr>
+	  <th class="mdl-data-table__cell--non-numeric">Dynamic Network</th>
+	  <th class="mdl-data-table__cell--non-numeric">Nodes name</th>
+	  <!-- <th class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-target'">View data table</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-disease'">View data table</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'herb' || idType === 'compound'">Target Type</th> -->
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  matTooltip="{{matTooltip.DL}}">DL</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  matTooltip="{{matTooltip.stars}}">Stars</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  matTooltip="{{matTooltip.QPlogBB}}">QplogBB</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  matTooltip="{{matTooltip.RuleOfFive}}">RuleOfFive</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  matTooltip="{{matTooltip.PercentHumanOralAbsorption}}">PercentHumanOralAbsorption</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+	  >Submit</th>
+	</tr>
+	<tr>
+	  <td class="mdl-data-table__cell--non-numeric">
+		<mat-slide-toggle
+		  [(ngModel)]="showDynamicNetwork"
+		  (change)="networkTransform()"
+		></mat-slide-toggle>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric">
+		<mat-slide-toggle
+		  [(ngModel)]="showLabel"
+		  (change)="showNodeLabel()"
+		></mat-slide-toggle>
+	  </td>
+	  <!-- <td class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-target'">
+		<button mat-button color="primary" (click)="gotoTargetList()">View</button>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-disease'">
+		<button mat-button color="primary" (click)="gotoDiseaseList()">View</button>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="idType==='herb' || idType === 'compound'">
+		<mat-select [(value)]="targetType">
+		  <mat-option value="False">TTD Target</mat-option>
+		  <mat-option value="True">All Target</mat-option>
+		</mat-select>
+	  </td> -->
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-slider
+		  [min]="0.18"
+		  [max]="1"
+		  [step]="0.001"
+		  [thumbLabel]="true"
+		  [(ngModel)]="dl"
+		></mat-slider>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Stars Min"
+				 [(ngModel)]="starsMin"
+				 min="0"
+				 step="1"
+				 max="5">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Stars Max"
+				 [(ngModel)]="starsMax"
+				 min="{{starsMin}}"
+				 step="1"
+				 max="5">
+		</mat-form-field>
+		<p>range: 0~5</p>
+	   </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field  class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="QplogBB Min"
+				 [(ngModel)]="qpbbMin"
+				 min="-3"
+				 step="0.01"
+				 max="1.2">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="QplogBB Max"
+				 [(ngModel)]="qpbbMax"
+				 min="{{qpbbMin}}"
+				 step="0.01"
+				 max="5">
+		</mat-form-field>
+		<p>range: -3~1.2</p>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="RuleOfFive Min"
+				 [(ngModel)]="rofMin"
+				 min="0"
+				 step="1"
+				 max="4">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="RuleOfFive Max"
+				 [(ngModel)]="rofMax"
+				 min="{{rofMin}}"
+				 step="1"
+				 max="4">
+		</mat-form-field>
+		<p>range: 0~4</p>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="PHUA Min"
+				 [(ngModel)]="phoaMin"
+				 min="0"
+				 step="0.1"
+				 max="100">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width" *ngIf="displayFilterParams">
+		  <input matInput
+				 type="number"
+				 placeholder="PHUA Max"
+				 [(ngModel)]="phoaMax"
+				 min="{{phoaMin}}"
+				 step="0.1"
+				 max="100">
+		</mat-form-field>
+		<p>range: 0.0~100.0</p>
+	  </td >
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<button mat-raised-button color="primary" type="submit" (click)="updateNetworkData()">submit</button></td>
+	</tr>
+  </table>

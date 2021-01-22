@@ -6,6 +6,7 @@ import {ShouyeComponent} from './layout/shouye/shouye.component';
 import {HelpComponent} from './layout/help/help.component';
 import {DetailsComponent} from './layout/main-content/details/details.component';
 import {TargetComponent} from './layout/main-content/Target/target/target.component';
+import {AssayComponent} from './layout/main-content/assay/assay.component';
 import {TableTargetComponent} from './layout/main-content/table-target/table-target.component';
 import {TableDerivativeComponent} from './layout/main-content/table-derivative/table-derivative.component';
 import {SearchRComponent} from './layout/main-content/search-r/search-r.component';
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'target/:id',
     component: TargetComponent
+  },
+  {
+    path: 'assay/:id',
+    component: AssayComponent
   },
   {
     path: 'Derivative/:id',
