@@ -1,5 +1,6 @@
 <h5>Target Properties</h5>
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+
   <tr>
     <th>Target Name</th>
     <th class="mdl-data-table__cell--non-numeric">
@@ -7,17 +8,32 @@
     </th>
   </tr>
   <tr>
-    <th>Uniprot Id</th>
-    <td class="mdl-data-table__cell--non-numeric">{{targetinf?.uniprot_id}}</td>
+    <th>Target ID</th>
+    <th class="mdl-data-table__cell--non-numeric">
+      <div class='ab'>
+      <a  [routerLink]="['/target/'+targetinf.tid]" target="_blank" routerLinkActive="router-link-active">{{targetinf?.tid}}</a>
+      </div>
+    </th>
   </tr>
-  <tr>
+  <tr> 
+    <th>Uniprot ID</th>
+    <th>
+      <div class='ab'>
+      <span *ngFor='let sz of shuzu' >
+        <a  href="https://www.uniprot.org/uniprot/{{sz}}" target="_blank" >
+          {{sz}}</a>
+        </span>
+      </div>
+    </th>
+  </tr>
+  <!-- <tr>
     <th>Gene</th>
     <td class="mdl-data-table__cell--non-numeric">{{targetinf?.gene}}</td>
   </tr>
   <tr>
     <th>Target Class</th>
     <td class="mdl-data-table__cell--non-numeric">{{targetinf?.target_class}}</td>
-  </tr>
+  </tr> -->
   <tr>
     <th>Organism</th>
     <td class="mdl-data-table__cell--non-numeric">{{targetinf?.organism}}</td>

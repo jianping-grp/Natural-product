@@ -22,33 +22,35 @@ export class PropertiesCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.data.moleculeChemblId);
     if(this.data.moleculeChemblId.indexOf('N')!=-1){
-    this.rest.getDataList(`NPChemInfo/?np_id=${this.data.moleculeChemblId}`)
+    this.rest.getDataList(`NPChemInfo/?mol_id=${this.data.moleculeChemblId}`)
     .subscribe(data => {
-      this.arr1 = data['np_chem_info2s'][0];
+      this.arr1 = data['mol_chem_info_alls'][0];
       // this.drug = data;
       // this.pageMeta = data['meta'];
-      console.log(this.moleculeStructure);
+     
     })
-    this.rest.getDataList(`NPIdOtherdb/?np_id=${this.data.moleculeChemblId}`)
+    this.rest.getDataList(`MolIdOtherdb/?mol_id=${this.data.moleculeChemblId}`)
     .subscribe(data => {
-      this.arr2= data['np_id_otherdbs'][0];
+      this.arr2= data['mol_id_otherdbs'][0];
       console.log(this.arr1);
     });
     // this.getNumNP(0,10)
   }
   else{
-    this.rest.getDataList(`DerChemInfo/?der_id=${this.data.moleculeChemblId}`)
+    this.rest.getDataList(`DerChemInfo/?mol_id=${this.data.moleculeChemblId}`)
     .subscribe(data => {
-      this.arr1 = data['der_chem_info2s'][0];
+      this.arr1 = data['mol_chem_info_alls'][0];
       // this.drug = data;
       // this.pageMeta = data['meta'];
+      console.log(this.arr1);
       console.log(this.moleculeStructure);
     })
-    this.rest.getDataList(`DerIdOtherdb/?der_id=${this.data.moleculeChemblId}`)
+    this.rest.getDataList(`MolIdOtherdb/?mol_id=${this.data.moleculeChemblId}`)
     .subscribe(data => {
-      this.arr2= data['der_id_otherdbs'][0];
-      console.log(this.arr1);
+      this.arr2= data['mol_id_otherdbs'][0];
+      
     });
   }
     // this.getNumDER(0,10)
@@ -69,6 +71,10 @@ export class PropertiesCardComponent implements OnInit {
   // 跳转靶点信息列表页面
   // goTargetList(){
   //   this.router.navigate(['/target-table/','?mol_id='+this.data.moleculeChemblId])
+  // }
+  // tiaozhuan(id){
+  //   this.router.navigate(['/compound/',id])
+  //   this.dialogRef.close()
   // }
   close() {
     this.dialogRef.close()

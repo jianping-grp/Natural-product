@@ -1,0 +1,40 @@
+<h5>Doc Details</h5>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+
+  <tr>
+    <th>Doc ID</th>
+    <th class="mdl-data-table__cell--non-numeric">
+        {{docinf?.doc_id}}
+    </th>
+  </tr>
+  <tr>
+    <th>Doi</th>
+    <th class="mdl-data-table__cell--non-numeric">
+        {{docinf?.doi}}
+    </th>
+  </tr>
+  <tr>
+    <th>Pubmed ID</th>
+    <th class="mdl-data-table__cell--non-numeric">
+        {{docinf?.pubmed_id}}
+    </th>
+  </tr>
+  <tr>
+    <th>Patent ID</th>
+    <th class="mdl-data-table__cell--non-numeric">
+        {{docinf?.patent_id}}
+    </th>
+  </tr>
+  <tr> 
+    <th>Other ID</th>
+    <th>
+      <div class='ab'>
+        <a  href="https://www.ebi.ac.uk/chembl/document_report_card/{{docinf?.other_id}}" target="_blank" >
+          {{docinf?.other_id}}</a>
+      </div>
+    </th>
+  </tr>
+</table>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</div>

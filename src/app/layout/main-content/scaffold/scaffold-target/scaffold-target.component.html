@@ -1,0 +1,52 @@
+<table mat-table [dataSource]="images" 
+  matSort [el-loading]="isLoading"[text]="'It’s loading'"
+  class="mat-elevation-z8">
+  <ng-container matColumnDef="mol_id">
+    <th mat-header-cell *matHeaderCellDef> Mol ID</th>
+    <td mat-cell *matCellDef="let element">
+     {{element.mol_id}}</td>
+  </ng-container>
+  <ng-container matColumnDef="assay_id">
+    <th mat-header-cell *matHeaderCellDef> Assay ID</th>
+    <td mat-cell *matCellDef="let element">
+      <a  [routerLink]="['/assay/'+element.assay_id]" target="_blank" routerLinkActive="router-link-active">{{element.assay_id}}</a> </td>
+  </ng-container>
+  <ng-container matColumnDef="target_id">
+    <th mat-header-cell *matHeaderCellDef> Target ID</th>
+    <td mat-cell *matCellDef="let element">
+      <a  [routerLink]="['/target/'+element.target_id]" target="_blank" routerLinkActive="router-link-active">{{element.target_id}}</a> </td>
+  </ng-container>
+  <ng-container matColumnDef="activity_type">
+    <th mat-header-cell *matHeaderCellDef> Activity Type</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.activity_type}}
+  </ng-container>
+  <ng-container matColumnDef="activity_value">
+    <th mat-header-cell *matHeaderCellDef> Activity Value</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.activity_value}}
+  </ng-container>
+  <ng-container matColumnDef="doc_id">
+    <th mat-header-cell *matHeaderCellDef> Doc ID</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="primary" (click)="openDocDialog(element.doc_id)">
+        {{element.doc_id}}
+        </button>
+      <!-- <a href="https://www.ebi.ac.uk/chembl/document_report_card/{{element.doc_id}}" target="_blank">{{element.doc_id}}</a> -->
+     </td>
+  </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+<div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+      <div class="mdl-cell mdl-cell--12-col">
+        <mat-paginator [length]="num"
+                       [pageSize]="5"                       
+                       (page)="pageChange($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+</div>

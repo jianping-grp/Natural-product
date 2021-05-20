@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  REST_HOST: 'http://172.16.41.157:9004'
+  REST_HOST: 'http://60.28.101.176:9004'
+  // REST_HOST: 'http://172.16.41.136:9004'
 };
 
 /*

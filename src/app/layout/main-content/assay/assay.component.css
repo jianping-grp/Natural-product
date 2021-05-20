@@ -27,18 +27,22 @@ a{
         height:1000px;
     }
     .network-table {
-        min-height: 800px;
+        min-height: 630px;
       }
       .mdl-data-table {
         margin: auto;
+        width:1084px;
+        overflow-x:scroll
       }
-      
+      /* .gr{
+        width: 1024px;
+        overflow-x:scroll
+      } */
+/*       
       .form-width {
         width: 80px;
       }
       
       .td-width {
         max-width: 100px;
-        /*justify-content: center;*/
-        /*justify-items: center*/
-      }
+      } */

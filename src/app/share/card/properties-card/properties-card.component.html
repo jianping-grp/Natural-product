@@ -5,16 +5,27 @@
         [width]="'250px'"
         [height]="'220px'"
         [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
-        [molString]="arr1?.canonical_smiles"
+        [molString]="arr1?.smiles"
 ></app-jsme>
 </div>
 <div class="mdl-cell mdl-cell--8-col"  >
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
   <tr>
-    <th >synonyms</th>
+    <th >Synonyms</th>
     <th class="mdl-data-table__cell--non-numeric wrap">
         <div title="{{arr1?.synonyms}}">{{arr1?.synonyms}}</div>
     </th>
+  </tr>
+  <tr>
+    <th>Database ID</th>
+    <td>
+      <!-- <button mat-button mat-dialog-close color="primary" (click)="tiaozhuan(arr1?.mol_id)">
+        {{arr1?.mol_id}}
+      </button> -->
+      <div class='ab'>
+        <a  [routerLink]="['/compound/'+arr1?.mol_id]" target="_blank" routerLinkActive="router-link-active">{{arr1?.mol_id}}</a>
+      </div>    
+    </td>
   </tr>
   <!-- <tr>
     <th>Smiles</th>

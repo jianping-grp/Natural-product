@@ -12,6 +12,7 @@ import { AgGridAngular } from 'ag-grid-angular';
   styleUrls: ['./table-target.component.css']
 })
 export class TableTargetComponent implements OnInit {
+  isLoading = true;
   total_results:number;
   params;
   private gridApi;
@@ -27,7 +28,7 @@ export class TableTargetComponent implements OnInit {
     {headerName: 'Pref Name', field: 'name', sortable: true, filter: true, width:260  },
     {headerName: 'Target Id', field: 'tid', sortable: true, filter: true, width:260 ,  },
     {headerName: 'Target Type ', field: 'type', sortable: true, filter: true, width:260  },
-    {headerName: 'Target Class ', field: 'target_class', sortable: true, filter: true, width:260  },
+    // {headerName: 'Target Class ', field: 'target_class', sortable: true, filter: true, width:260  },
     {headerName: 'Organism', field: 'organism', sortable: true, filter: true, width:260  }
     
   ];
@@ -59,12 +60,15 @@ export class TableTargetComponent implements OnInit {
 private _getDrugs(page?, perPage?) {
     this.restservice.getDataList(`TargetInfo/${this.result1}&ordering=target_id`, page, perPage)
     .subscribe(data => {
-      this.images = data['target_info2s'];
+      this.images = data['target_info_news'];
       this.total_results = data['meta']['total_results'];
       console.log(this.images);
+      console.log(this.sort);
+      this.isLoading = false;
     });
 }
 pageChange(event) {
+  this.isLoading = true;
   this._getDrugs(event.pageIndex, event.pageSize);
 }
 

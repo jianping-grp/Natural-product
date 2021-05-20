@@ -1,10 +1,12 @@
 <h2>Target Details</h2>
 <hr>
-<div class="container-fluid">
+<h4>Basic Information</h4>
+<div class="container-fluid" [el-loading]="isLoading2"[text]="'It’s loading'" >
   <!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
 	<div class="row-fluid" >
 	<!--  -->
-		<div class="span12"  >
+
+		<div class="span12" >
 			<table class="table table-bordered" *ngFor='let image of images' >
 				<tbody>
             		<tr class="info">
@@ -12,7 +14,7 @@
                 		<td>{{image.name}}</td>
               		</tr>
 					<tr>
-						<td>Target Id</td>
+						<td>Target ID</td>
 						<td>{{image.tid}}</td>
 					</tr>
 					<tr class="success">
@@ -24,41 +26,37 @@
 						<td>Organism</td>
 						<td>{{image.organism}}</td>
 					</tr>
-					<tr class="warning">
-						<td>Target Uniprot Id</td>
+					<!-- <tr class="warning">
+            <td>Target Class</td>
+						<td>{{image.target_class}}</td>
+          </tr> -->
+
+					<!-- <tr >
+            <td>Gene</td>
+            <td>{{image.gene}}</td>
+          </tr> -->
+					<tr class="info"> 
+						<td>Target Uniprot ID</td>
 						<td>
               <span *ngFor='let sz of shuzu' >
                 <a  href="https://www.uniprot.org/uniprot/{{sz}}" target="_blank" >
                   {{sz}}</a>
                 </span>
 						</td>
-          </tr>
-          <!-- <tr>
-						<td>Target Pubmed Id</td>
-						<td>
-              
-              <a  href="https://pubmed.ncbi.nlm.nih.gov/{{image.pubmed_id}}" target="_blank" >
-                {{image.pubmed_id}}
-              </a>
-            </td>
-					</tr> -->
-					<tr >
-            <td>Gene</td>
-            <td>{{image.gene}}</td>
-          </tr>
-					<tr class="info"> 
-						<td>Target Class</td>
-						<td>{{image.target_class}}</td>
 					</tr>
-
-					<tr class="error">
-						<td>Organism</td>
-						<td>{{image.organism}}</td>
-					</tr>
-					<tr class="success">
+            <!-- <tr>
+              <td>Target Pubmed Id</td>
+              <td>
+                
+                <a  href="https://pubmed.ncbi.nlm.nih.gov/{{image.pubmed_id}}" target="_blank" >
+                  {{image.src_target_id}}
+                </a>
+              </td>
+            </tr> -->
+					<!-- <tr class="success">
 						<td>Target Synonyms</td>
 						<td>{{image.synonyms}}</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>Related Molecules</td>
             <td  >
@@ -75,7 +73,7 @@
 						
 					</tr> -->
 					<tr class="warning">
-						<td>Bioactivitles</td>
+						<td>Bioactivity</td>
 						<td>
 							<a  [routerLink]="['/BTarget/'+image.tid]" routerLinkActive="router-link-active">Natural Products&nbsp;&nbsp;Bioactivity({{num}}) </a>
 							
@@ -86,24 +84,414 @@
 		</div>
 	</div>
 </div>
+<h4>MMP Network</h4>
+<div 
+class="network-table"
+echarts 
+[options]="echartOptions" 
+(chartInit)="onChartInit($event)"
+(chartDblClick)="onDbClick($event)"
+></div>
+<table class="mdl-data-table gr" style='overflow:auto'>
+	<tr>
+
+	  <!-- <th class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-target'">View data table</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-disease'">View data table</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'herb' || idType === 'compound'">Target Type</th> -->
+	  <!-- <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  matTooltip="{{matTooltip.DL}}">DL</th> -->
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >Molecular Weight</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >AlogP</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		 >HBD</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >HBA</th>
+	  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >RTB</th>
+		  <th class="mdl-data-table__cell--non-numeric">Dynamic Network</th>
+		  <th class="mdl-data-table__cell--non-numeric">Nodes Name</th>
+		  <th class="mdl-data-table__cell--non-numeric">Show Structure</th>
+	  <!-- <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >PSA</th>	 -->
+
+	</tr>
+	<tr>
+
+	  <!-- <td class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-target'">
+		<button mat-button color="primary" (click)="gotoTargetList()">View</button>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="idType === 'prescription-herb-disease'">
+		<button mat-button color="primary" (click)="gotoDiseaseList()">View</button>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="idType==='herb' || idType === 'compound'">
+		<mat-select [(value)]="targetType">
+		  <mat-option value="False">TTD Target</mat-option>
+		  <mat-option value="True">All Target</mat-option>
+		</mat-select>
+	  </td> -->
+	  <!-- <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-slider
+		  [min]="1"
+		  [max]="2"
+		  [step]="1"
+		  [thumbLabel]="true"
+		  [(ngModel)]="dl"
+		></mat-slider>
+	  </td> -->
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Molecular Weight Min"
+				 [(ngModel)]="mwMin"
+				 min="0"
+				 step="1"
+				 max="4000">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Molecular Weight Max"
+				 [(ngModel)]="mwMax"
+				 min="{{mwMin}}"
+				 step="1"
+				 max="4000">
+		</mat-form-field>
+		<p>range: 0~4000</p>
+	   </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field  class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="AlogP Min"
+				 [(ngModel)]="alogpMin"
+				 min="-40"
+				 step="1"
+				 max="29">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="AlogP Max"
+				 [(ngModel)]="alogpMax"
+				 min="{{alogpMin}}"
+				 step="1"
+				 max="29">
+		</mat-form-field>
+		<p>range: -40~29</p>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="HBA Min"
+				 [(ngModel)]="hbaMin"
+				 min="0"
+				 step="1"
+				 max="106">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="HBA Max"
+				 [(ngModel)]="hbaMax"
+				 min="{{hbaMin}}"
+				 step="1"
+				 max="106">
+		</mat-form-field>
+		<p>range: 0~106</p>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="HBD Min"
+				 [(ngModel)]="hbdMin"
+				 min="0"
+				 step="1"
+				 max="54">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="HBD Max"
+				 [(ngModel)]="hbdMax"
+				 min="{{hbdMin}}"
+				 step="1"
+				 max="54">
+		</mat-form-field>
+		<p>range: 0~54</p>
+	  </td >
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="RTB Min"
+				 [(ngModel)]="rtbMin"
+				 min="0"
+				 step="1"
+				 max="86">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width" >
+		  <input matInput
+				 type="number"
+				 placeholder="RTB Max"
+				 [(ngModel)]="rtbMax"
+				 min="{{rtbMin}}"
+				 step="1"
+				 max="86">
+		</mat-form-field>
+		<p>range: 0~86</p>
+	  </td >
+	  <!-- <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="PSA Min"
+				 [(ngModel)]="psaMin"
+				 min="0"
+				 step="1"
+				 max="4000">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="PSA Max"
+				 [(ngModel)]="psaMax"
+				 min="{{psaMin}}"
+				 step="1"
+				 max="4000">
+		</mat-form-field>
+		<p>range: 0~4000</p>
+	   </td> -->
+	   <td class="mdl-data-table__cell--non-numeric">
+		<mat-slide-toggle
+		  [(ngModel)]="showDynamicNetwork"
+		  (change)="networkTransform()"
+		></mat-slide-toggle>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric">
+		<mat-slide-toggle
+		  [(ngModel)]="showLabel"
+		  (change)="showNodeLabel()"
+		></mat-slide-toggle>
+	  </td>
+	  <td class="mdl-data-table__cell--non-numeric">
+		<mat-slide-toggle
+		  [(ngModel)]="showStructure"
+		  (change)="showStructureM()"
+		></mat-slide-toggle>
+	  </td>
+	   </tr>
+	   <tr>
+		<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>AROM</th>	
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>ALERTS</th>
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>QED</th>  
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>Sascore</th>  
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>Npscore</th>  
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>Freesasa</th>  
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>Phase</th> 
+	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+	>Submit</th>
+	</tr>
+	<tr>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="AROM Min"
+				 [(ngModel)]="aromMin"
+				 min="0"
+				 step="1"
+				 max="18">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="AROM Max"
+				 [(ngModel)]="aromMax"
+				 min="{{aromMin}}"
+				 step="1"
+				 max="18">
+		</mat-form-field>
+		<p>range: 0~18</p>
+	   </td>
+	   <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="ALERTS Min"
+				 [(ngModel)]="alertsMin"
+				 min="0"
+				 step="1"
+				 max="10">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="ALERTS Max"
+				 [(ngModel)]="alertsMax"
+				 min="{{alertsMin}}"
+				 step="1"
+				 max="10">
+		</mat-form-field>
+		<p>range: 0~10</p>
+	   </td>
+	   <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="QED Min"
+				 [(ngModel)]="qedMin"
+				 min="0"
+				 step="0.01"
+				 max="0.95">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="QED Max"
+				 [(ngModel)]="qedMax"
+				 min="{{qedMin}}"
+				 step="0.01"
+				 max="0.95">
+		</mat-form-field>
+		<p>range: 0~0.95</p>
+	   </td>
+	   <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Sascore Min"
+				 [(ngModel)]="sasMin"
+				 min="1"
+				 step="1"
+				 max="10">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Sascore Max"
+				 [(ngModel)]="sasMax"
+				 min="{{sasMin}}"
+				 step="1"
+				 max="10">
+		</mat-form-field>
+		<p>range: 1~10</p>
+	   </td>
+	   <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Npscore Min"
+				 [(ngModel)]="npMin"
+				 min="-4.13"
+				 step="0.01"
+				 max="4.11">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Npscore Max"
+				 [(ngModel)]="npMax"
+				 min="{{npMin}}"
+				 step="0.01"
+				 max="4.11">
+		</mat-form-field>
+		<p>range: -4.13~4.11</p>
+	   </td>
+	   <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Freesasa Min"
+				 [(ngModel)]="freeMin"
+				 min="24"
+				 step="1"
+				 max="4120">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Freesasa Max"
+				 [(ngModel)]="freeMax"
+				 min="{{freeMin}}"
+				 step="1"
+				 max="4120">
+		</mat-form-field>
+		<p>range: 24~4120</p>
+	   </td>
+	   <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Phase Min"
+				 [(ngModel)]="phaseMin"
+				 min="0"
+				 step="1"
+				 max="4">
+		</mat-form-field>
+		<br/>
+		<mat-form-field class="form-width">
+		  <input matInput
+				 type="number"
+				 placeholder="Phase Max"
+				 [(ngModel)]="phaseMax"
+				 min="{{phaseMin}}"
+				 step="1"
+				 max="4">
+		</mat-form-field>
+		<p>range: 0~4</p>
+	   </td>
+
+	  <!-- <td></td> -->
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<button mat-raised-button color="primary" type="submit" (click)="updateNetworkData()">submit</button></td>
+	</tr>
+
+  </table>
 <h4>Related Natural Products and Derivatives MMP Information</h4>
 <table mat-table [dataSource]="images1" 
 matSort
-
+[el-loading]="isLoading"[text]="'It’s loading'"
 
 class="mat-elevation-z8">
 <ng-container matColumnDef="Database Id1">
-  <th mat-header-cell *matHeaderCellDef > Database Id 1 </th>
+  <th mat-header-cell *matHeaderCellDef > Database ID 1 </th>
   <td mat-cell *matCellDef="let element">
-  <a  [routerLink]="['/Derivative/'+element.mol_id1]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id1}}</a> </td>
+    <button mat-button color="primary" (click)="tiaozhuan(element.mol_id1)">{{element.mol_id1}}</button>
+  </td>
 </ng-container>
 <ng-container matColumnDef="Database Id2">
-	<th mat-header-cell *matHeaderCellDef > Database Id 2 </th>
+	<th mat-header-cell *matHeaderCellDef > Database ID 2 </th>
 	<td mat-cell *matCellDef="let element">
-	<a  [routerLink]="['/compound/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> </td>
+    <button mat-button color="primary" (click)="tiaozhuan(element.mol_id2)">{{element.mol_id2}}</button>
+	<!-- <a  [routerLink]="['/compound/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> -->
+ </td>
   </ng-container>
   <ng-container matColumnDef="compound1 Structure">
-    <th mat-header-cell *matHeaderCellDef> Compound structure 1</th>
+    <th mat-header-cell *matHeaderCellDef> Compound Structure 1</th>
     <td mat-cell *matCellDef="let element">
       <app-jsme [elementId]="element?.id+'c1'"
       [width]="'100px'"
@@ -113,7 +501,7 @@ class="mat-elevation-z8">
   ></app-jsme></td>
   </ng-container>
   <ng-container matColumnDef="compound2 Structure">
-    <th mat-header-cell *matHeaderCellDef> Compound structure 2</th>
+    <th mat-header-cell *matHeaderCellDef> Compound Structure 2</th>
     <td mat-cell *matCellDef="let element">
       <app-jsme [elementId]="element?.id+'c2'"
       [width]="'100px'"
@@ -123,7 +511,7 @@ class="mat-elevation-z8">
   ></app-jsme></td>
   </ng-container>
 <ng-container matColumnDef="Structure">
-  <th mat-header-cell *matHeaderCellDef> Core structure</th>
+  <th mat-header-cell *matHeaderCellDef> Core Structure</th>
   <td mat-cell *matCellDef="let element">
     <app-jsme [elementId]="element?.id+'core'"
     [width]="'100px'"
@@ -148,14 +536,19 @@ class="mat-elevation-z8">
     <a  [routerLink]="['/target/'+element.tid]" target="_blank" routerLinkActive="router-link-active">{{element.tid}}</a> </td>
   </ng-container> -->
   <ng-container matColumnDef="Assay Id">
-    <th mat-header-cell *matHeaderCellDef> Assay Id</th>
-    <td mat-cell *matCellDef="let element"><a href="{{element.assay_url}}" target="_blank">
-		{{element.assay_id}}  </a>  </td>
+    <th mat-header-cell *matHeaderCellDef> Assay ID</th>
+    <td mat-cell *matCellDef="let element"><a  [routerLink]="['/assay/'+element.assay_id]" target="_blank" routerLinkActive="router-link-active">{{element.assay_id}}</a>
+   </td>
   </ng-container>
   <ng-container matColumnDef="Doc Id">
-    <th mat-header-cell *matHeaderCellDef> Doc Id</th>
-    <td mat-cell *matCellDef="let element"> <a href="https://www.ebi.ac.uk/chembl/document_report_card/{{element.doc_id}}" target="_blank">
-      {{element.doc_id}}  </a> </td>
+    <th mat-header-cell *matHeaderCellDef> Doc ID</th>
+    <td mat-cell *matCellDef="let element"> 		<button mat-button color="primary" (click)="openDocDialog(element.doc_id)">
+			{{element.doc_id}}
+		  </button> </td>
+  </ng-container>
+  <ng-container matColumnDef="activity_comment">
+	<th mat-header-cell *matHeaderCellDef> Activity Comment</th>
+	<td mat-cell *matCellDef="let element"> {{element.activity_comment}} </td>
   </ng-container>
   <ng-container matColumnDef="activity_type">
     <th mat-header-cell *matHeaderCellDef> Activity Type</th>
@@ -167,7 +560,7 @@ class="mat-elevation-z8">
       <td mat-cell *matCellDef="let element"> {{element.activity_value}} </td>
     </ng-container>
     <ng-container matColumnDef="MW">
-      <th mat-header-cell *matHeaderCellDef> MW</th>
+      <th mat-header-cell *matHeaderCellDef> Mol Weight</th>
       <td mat-cell *matCellDef="let element"> {{element.MW}} </td>
     </ng-container>
     <ng-container matColumnDef="PSA">
@@ -175,7 +568,7 @@ class="mat-elevation-z8">
       <td mat-cell *matCellDef="let element"> {{element.PSA}} </td>
     </ng-container>
     <ng-container matColumnDef="ALOGP">
-      <th mat-header-cell *matHeaderCellDef > ALOGP </th>
+      <th mat-header-cell *matHeaderCellDef > AlogP </th>
       <td mat-cell *matCellDef="let element"> {{element.ALOGP}} </td>
     </ng-container>
     <ng-container matColumnDef="HBD">
@@ -203,6 +596,22 @@ class="mat-elevation-z8">
       <th mat-header-cell *matHeaderCellDef> QED</th>
       <td mat-cell *matCellDef="let element"> {{element.qed}} </td>
     </ng-container>
+    <ng-container matColumnDef="sascore">
+      <th mat-header-cell *matHeaderCellDef> Sascore</th>
+      <td mat-cell *matCellDef="let element"> {{element.sascore}} </td>
+    </ng-container>
+    <ng-container matColumnDef="npscore">
+      <th mat-header-cell *matHeaderCellDef> Npscore</th>
+      <td mat-cell *matCellDef="let element"> {{element.npscore}} </td>
+    </ng-container>
+    <ng-container matColumnDef="freesasa">
+      <th mat-header-cell *matHeaderCellDef> Freesasa</th>
+      <td mat-cell *matCellDef="let element"> {{element.freesasa}} </td>
+    </ng-container>
+    <ng-container matColumnDef="max_phase">
+      <th mat-header-cell *matHeaderCellDef> Max Phase</th>
+      <td mat-cell *matCellDef="let element"> {{element.max_phase}} </td>
+    </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumnsb;sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumnsb;"></tr>
 </table>
@@ -215,9 +624,62 @@ class="mat-elevation-z8">
     </mat-select>
   </mat-form-field>
 	  <div class="mdl-cell mdl-cell--12-col">
-		<mat-paginator [length]="pageMeta.total_results"
-			   [pageSize]="pageMeta.per_page"
+		<mat-paginator [length]="pageMeta?.total_results"
+			   [pageSize]="pageMeta?.per_page"
 			   [pageSizeOptions]="pageSizeOptions"
 			   (page)="pageChange($event)"
 		></mat-paginator>
     </div>
+	<h4>Related Scaffold</h4>
+	<table mat-table [dataSource]="drugs" 
+	matSort
+	[el-loading]="isLoading3"[text]="'It’s loading'"
+	class="mat-elevation-z8">
+	  <ng-container matColumnDef="scaffold_smiles">
+		<th mat-header-cell *matHeaderCellDef>  Structure </th>
+		<td mat-cell *matCellDef="let element">
+		  <app-jsme [elementId]="element?.scaffold_smiles+'c1'"
+		  [width]="'100px'"
+		  [height]="'160px'"
+		  [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+		  [molString]="element.scaffold_smiles"
+	  ></app-jsme></td>
+	  </ng-container>
+	  <!-- <ng-container matColumnDef="tid">
+		<th mat-header-cell *matHeaderCellDef > Target Id </th>
+		<td mat-cell *matCellDef="let element">
+		<a  [routerLink]="['/target/'+element.tid]" target="_blank" routerLinkActive="router-link-active">{{element.tid}}</a> </td>
+	  </ng-container> -->
+	  <ng-container matColumnDef="activity_type">
+		<th mat-header-cell *matHeaderCellDef> Activity Type</th>
+		<td mat-cell *matCellDef="let element"> {{element.activity_type}} </td>
+	  </ng-container>
+		<ng-container matColumnDef="value_max">
+			<th mat-header-cell *matHeaderCellDef > Max Activity </th>
+			<td mat-cell *matCellDef="let element"> {{element.value_max}} </td>
+		  </ng-container>
+		<ng-container matColumnDef="value_mean">
+		  <th mat-header-cell *matHeaderCellDef> Mean Activity</th>
+		  <td mat-cell *matCellDef="let element"> {{element.value_mean}} </td>
+		</ng-container>
+		<ng-container matColumnDef="value_min">
+		  <th mat-header-cell *matHeaderCellDef> Min Activity</th>
+		  <td mat-cell *matCellDef="let element"> {{element.value_min}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="num" >
+			<th mat-header-cell *matHeaderCellDef> Mol Num </th>
+			<td mat-cell *matCellDef="let element"> 
+			<button mat-button color="primary" (click)="tiaozhuans(element.scaffold_smiles)">{{element.mol_num}}</button> </td>			
+		  </ng-container>
+	  <tr mat-header-row *matHeaderRowDef="displayedColumnss;sticky: true"></tr>
+	  <tr mat-row *matRowDef="let row; columns: displayedColumnss;"></tr>
+	</table>
+	<div class="mdl-cell mdl-cell--12-col">
+		  <div class="mdl-cell mdl-cell--12-col">
+			<mat-paginator [length]="count"
+			[pageSize]="5"
+			[pageSizeOptions]="pageSizeOptions"
+			(page)="pageChanges($event)"
+	 ></mat-paginator>
+		</div>

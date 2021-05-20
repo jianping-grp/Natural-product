@@ -1,0 +1,73 @@
+<h3 class="text-position">Scaffold Search Results</h3>
+<table mat-table [dataSource]="images" 
+  matSort [el-loading]="isLoading"[text]="'It’s loading'"
+  class="mat-elevation-z8">
+  <ng-container matColumnDef="core">
+    <th mat-header-cell *matHeaderCellDef> Mol ID</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="primary" (click)="tiaozhuan(element.mol_id)">{{element.mol_id}}</button>
+      <!-- <a  [routerLink]="['/compound/'+element.mol_id]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id}}</a> </td> -->
+  </ng-container>
+  <ng-container matColumnDef="Structure">
+    <th mat-header-cell *matHeaderCellDef> Structure</th>
+    <td mat-cell *matCellDef="let element">
+      <app-jsme [elementId]="element?.smiles+element?.mol_id"
+      [width]="'200px'"
+      [height]="'160px'"
+      [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element?.smiles | toR"
+></app-jsme>
+  </ng-container>
+  <!-- <ng-container matColumnDef="detail" >
+    <th mat-header-cell *matHeaderCellDef> Detail </th>
+    <td mat-cell *matCellDef="let element"> 
+    <button mat-button color="primary" (click)="Tiaozhuan(element.canonical_smiles)">Detail</button> </td>
+    
+  </ng-container> -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+<div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+      <div class="mdl-cell mdl-cell--12-col">
+        <mat-paginator [length]="num"
+                       [pageSize]="5"                       
+                       (page)="pageChange($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+</div>
+<table mat-table [dataSource]="images2" 
+  matSort [el-loading]="isLoading2"[text]="'It’s loading'"
+  class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Target ID</th>
+    <td mat-cell *matCellDef="let element">
+      <a  [routerLink]="['/target/'+element.target_id]" target="_blank" routerLinkActive="router-link-active">{{element.target_id}}</a> </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Target Name</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.target_name}}
+  </ng-container>
+  <ng-container matColumnDef="num" >
+    <th mat-header-cell *matHeaderCellDef> Mol Num </th>
+    <td mat-cell *matCellDef="let element"> 
+    <button mat-button color="primary" (click)="Tiaozhuan(element.target_id)">{{element.mol_num}}</button> </td>
+    
+  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+  </table>
+<div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+      <div class="mdl-cell mdl-cell--12-col">
+        <mat-paginator [length]="num2"
+                       [pageSize]="5"                       
+                       (page)="pageChange2($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<h2>Scaffold Search</h2>
+<hr>
+<div class="container">
+  <div class="row">
+  <div class="col-md-5">
+    <app-jsme [elementId]="'sea'"
+              #seaApplet
+              [width]="'95%'"
+              [height]="'400px'"
+              [showDemo]="true"
+    >loading JSME widget
+    </app-jsme>
+  </div>
+  <div class="col-md-2 content-center">
+    <button mat-raised-button color="accent" (click)="getJsmeSmiles()">
+      Get Smiles
+    </button>
+    <button mat-icon-button (click)="getJsmeSmiles()" color="warn">
+      <mat-icon>trending_flat</mat-icon>
+    </button>
+  </div>
+  <div class="col-md-5">
+    <h5>SMILES:</h5>
+    <textarea class="smile-container" [value]="jsmeSmiles" #textarea></textarea>
+    
+      <h6>Scaffold Type:</h6>
+      <mat-radio-group [(ngModel)]="structureType">
+        <mat-radio-button *ngFor="let typeEl of structureTypes" [value]="typeEl">
+          {{typeEl | titlecase}}&nbsp;&nbsp;&nbsp;
+        </mat-radio-button>
+      </mat-radio-group>
+      <br/><br/>
+      <div>   
+        <h5 class="font-color">
+    <div class="text-position">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit(textarea.value)"
+      >Submit
+      </button>
+    </div>
+    </h5>
+  </div>
+  </div>
+</div>

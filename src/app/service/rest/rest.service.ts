@@ -27,7 +27,7 @@ export class RestService {
       // .pipe(finalize(() => this.globalService.setLoading(true)));
   }
   public getDataList(
-    url: string, page = 0, perPage = this.PER_PAGE, ): Observable<any> {
+    url: string, page = 0, perPage = this.PER_PAGE): Observable<any> {
     // sortby = '',extraParam = ''
 // page + 1, as mat-paginator is 0-base while DRF is 1-base
     page = +(page) + 1;
@@ -36,7 +36,54 @@ export class RestService {
 // if (sortby !== '') {
 // sortParam = `&sort[]=${sortby}`;
 // }
-    return this.http.get(`${this.restHost}/${url}&page=${page}&size=${perPage}`)
+    return this.http.get(`${this.restHost}/${url}&page=${page}&per_page=${perPage}`)
+};
+public getDataListby(
+  url: string, page = 0, perPage = this.PER_PAGE,sortby:string ): Observable<any> {
+  // sortby = '',extraParam = ''
+// page + 1, as mat-paginator is 0-base while DRF is 1-base
+  page = +(page) + 1;
+// set global loadingStatus to true
+// let sortParam = '';
+// if (sortby !== '') {
+// sortParam = `&sort[]=${sortby}`;
+// }
+  return this.http.get(`${this.restHost}/${url}&page=${page}&per_page=${perPage}&ordering=${sortby}`)
+};
+public getDataList2(
+  url: string, page = 0 ): Observable<any> {
+  // sortby = '',extraParam = ''
+// page + 1, as mat-paginator is 0-base while DRF is 1-base
+  page = +(page) + 1;
+// set global loadingStatus to true
+// let sortParam = '';
+// if (sortby !== '') {
+// sortParam = `&sort[]=${sortby}`;
+// }
+  return this.http.get(`${this.restHost}/${url}&page=${page}`)
+};
+public getDataList3(
+  url: string, page = 0 ): Observable<any> {
+  // sortby = '',extraParam = ''
+// page + 1, as mat-paginator is 0-base while DRF is 1-base
+  page = +(page) + 1;
+// set global loadingStatus to true
+// let sortParam = '';
+// if (sortby !== '') {
+// sortParam = `&sort[]=${sortby}`;
+// }
+  return this.http.get(`${this.restHost}/?page=${page}&${url}`)
+};
+public getDataList4(
+  url: string): Observable<any> {
+  // sortby = '',extraParam = ''
+// page + 1, as mat-paginator is 0-base while DRF is 1-base
+// set global loadingStatus to true
+// let sortParam = '';
+// if (sortby !== '') {
+// sortParam = `&sort[]=${sortby}`;
+// }
+  return this.http.get(`${this.restHost}/${url}`)
 };
 registry(body: any) {
   return this.http.post(`${this.restHost}/TargetPrediction/`, body);

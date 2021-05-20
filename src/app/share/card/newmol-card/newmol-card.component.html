@@ -1,0 +1,61 @@
+<h5>New molecule Properties</h5>
+<div class="mdl-grid" >
+    <div class="mdl-cell mdl-cell--4-col"  >
+        <app-jsme [elementId]="'drug-detail'"
+        [width]="'250px'"
+        [height]="'220px'"
+        [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+        [molString]="arr1?.smiles"
+></app-jsme>
+</div>
+<div class="mdl-cell mdl-cell--8-col"  >
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+  <tr>
+    <th>Mol Weight</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.MW}}</td>
+  </tr>
+  <tr>
+    <th>AlogP</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.ALOGP}}</td>
+  </tr>
+  <tr>
+    <th>HBD</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.HBD}}</td>
+  </tr>
+  <tr>
+    <th>HBA</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.HBA}}</td>
+  </tr>
+  <tr>
+    <th>PSA</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.PSA}}</td>
+  </tr>
+  <tr>
+    <th>RTB</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.ROTB}}</td>
+  </tr>
+  <tr>
+    <th>Sa Score</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.sascore}}</td>
+  </tr>
+  <tr>
+    <th>NP Score</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.npscore}}</td>
+  </tr>
+  <tr>
+    <th>Freesasa</th>
+    <td class="mdl-data-table__cell--non-numeric">{{arr1?.freesasa}}</td>
+  </tr>
+  <tr>
+    <!-- <th>Targets</th>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button mat-button color="primary" (click)="goTargetList(); close()">
+        {{pageMeta?.total_results}}
+      </button>
+    </td> -->
+  </tr>
+</table>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</div>

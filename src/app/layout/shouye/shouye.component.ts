@@ -23,7 +23,7 @@ export class ShouyeComponent implements OnInit {
   chazhao() {
     this.scontent ="?search="+this.content.nativeElement.value;
     // this.restservice.postData('search/', this.scontent).subscribe(data => {console.log(data)})
-    this.router.navigate(['/compound-table/', this.scontent]);
+    this.router.navigate(['/compound-table-name/', this.scontent]);
   }
   chazhaot() {
     this.scontentt ='?search=' +this.contentt.nativeElement.value;

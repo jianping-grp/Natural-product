@@ -12,6 +12,7 @@ import { AgGridAngular } from 'ag-grid-angular';
   styleUrls: ['./table-derivative.component.css']
 })
 export class TableDerivativeComponent implements OnInit {
+  isLoading = true;
   params;
   num:number;
   private gridApi;
@@ -30,9 +31,9 @@ export class TableDerivativeComponent implements OnInit {
     {headerName: 'Numrotatablebonds', field: 'numrotatablebonds', sortable: true, filter: true, width:238 } 
   ];
       toppings = new FormControl();
-      toppingList: string[] = ['canonical_smiles', 'Database Id','Synonyms', 'Slogp','Mol Weight','HBA','HBD','Numrotatablebonds'];
-      displayedColumns: string[] = ['canonical_smiles', 'Database Id','Synonyms', 'Slogp','Mol Weight',];
-      allColumns:string[] = ['canonical_smiles', 'Database Id','Synonyms', 'Slogp','Mol Weight','HBA','HBD','Numrotatablebonds','PSA','AROM','ALERTS','qed'];
+      toppingList: string[] = [ 'Database ID','Smiles','Synonyms', 'AlogP','Mol Weight','HBA','HBD',];
+      displayedColumns: string[] = ['Database ID','Smiles', 'Synonyms', 'AlogP','Mol Weight','HBA','HBD',];
+      allColumns:string[] = ['Database ID','Smiles', 'Synonyms', 'AlogP','Mol Weight','HBA','HBD','Numrotatablebonds','PSA','AROM','ALERTS','qed','sascore','npscore','freesasa','max_phase'];
       images:any;
       total_results:number;per_page:number;
       result1: string;
@@ -59,7 +60,7 @@ export class TableDerivativeComponent implements OnInit {
   private _getDrugs2(page?, perPage?) {
     this.restservice.getDataList(`DerChemInfo/${this.result1}`, page, perPage)
     .subscribe(data => {
-      this.images = data['der_chem_info2s'];
+      this.images = data['mol_chem_info_alls'];
       console.log(data)
       this.pageMeta= data['meta'];
       // this.per_page=10
@@ -67,9 +68,11 @@ export class TableDerivativeComponent implements OnInit {
       console.log(data)
       console.log(this.images);
       console.log(this.pageMeta);
+      this.isLoading = false;
     });
   }
   pageChange(event) {
+    this.isLoading = true;
     this._getDrugs2(event.pageIndex, event.pageSize);
   }
   }

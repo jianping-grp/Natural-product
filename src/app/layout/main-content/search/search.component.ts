@@ -7,6 +7,8 @@ import {PathwayListParamType} from '../../../enum/pathway-list-param-type.enum';
 import {JsmeComponent} from '../../../jsme/jsme/jsme.component';
 import {RestService} from '../../../service/rest/rest.service';
 import {EmailValidator, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material';
+import {MmpCardComponent} from '../../../share/card/mmp-card/mmp-card.component';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -28,22 +30,22 @@ export class SearchComponent implements OnInit {
   structureType = this.structureTypes[0];
   similarity = 0.9;
   drugSearchTypeList = [
-    {inputType: 'Natural Product name', value: 'AC1OEVSY'},
-    {inputType: 'Database Id', value: 'NP000002'},
+    {inputType: 'Natural Product Name', value: 'Augustisepalin'},
+    {inputType: 'Database ID', value: 'NP1'},
   ];
   drugSelectedType = this.drugSearchTypeList[0].inputType;
   drugKeyword = this.drugSearchTypeList[0].value;
   targetSearchTypeList = [
-    {inputType: 'Target name', value: 'Alpha-1B adrenergic receptor'},
-    {inputType: 'Target Id', value: 'T0001'},
+    {inputType: 'Target Name', value: 'Alpha-1B adrenergic receptor'},
+    {inputType: 'Target ID', value: 'T10001'},
     {inputType: 'Target Type', value: 'SINGLE PROTEIN'},
     // {inputType: 'Uniprot Id', value: 'Q01693'}
   ];
   targetSelectedType = this.targetSearchTypeList[0].inputType;
   targetKeyword = this.targetSearchTypeList[0].value;
   pathwaySearchTypeList = [
-    {inputType: 'Derivative name', value: 'Eticlopride'},
-    {inputType: 'Derivative ID', value: 'D256623'}
+    {inputType: 'Derivative Name', value: 'Eticlopride'},
+    {inputType: 'Derivative ID', value: 'Der97'}
   ];
   pathwaySelectedType = this.pathwaySearchTypeList[0].inputType;
   pathwayKeyword = this.pathwaySearchTypeList[0].value;
@@ -51,6 +53,7 @@ export class SearchComponent implements OnInit {
   constructor(private router: Router,
               private globalService: GlobalService,
               private restservice: RestService ,
+              public dialog: MatDialog
               ) { };
 
   ngOnInit() {
@@ -72,7 +75,15 @@ export class SearchComponent implements OnInit {
       rot1: new FormControl('', [Validators.required, Validators.minLength(5)]),
   })
   }
-
+  onclick(event){
+    console.log(event)
+    this.dialog.open(MmpCardComponent, {
+      width: '900px',
+      // data: {
+      //   moleculeChemblId: moleculeChemblId
+      // }
+    })
+  }
   getJsmeSmiles() {
     this.jsmeSmiles = this.jsme.smiles;
   }
@@ -84,14 +95,14 @@ export class SearchComponent implements OnInit {
 
   drugSubmit() {
     this.drugKeyword = this.drugKeyword.trim();
-    if (this.drugSelectedType === 'Natural Product name') {
+    if (this.drugSelectedType === 'Natural Product Name') {
       this.drugKeyword='?search='+this.drugKeyword
-      this.router.navigate(['/compound-table/', this.drugKeyword])
-    } else if (this.drugSelectedType === 'Database Id') {
-      this.drugKeyword='?np_id='+this.drugKeyword
-      this.router.navigate(['/compound-table/', this.drugKeyword])
+      this.router.navigate(['/compound-table-name/', this.drugKeyword])
+    } else if (this.drugSelectedType === 'Database ID') {
+      this.drugKeyword='?mol_id='+this.drugKeyword
+      this.router.navigate(['/compound-table-name/', this.drugKeyword])
     }
-    this.router.navigate(['/compound-table/', this.drugKeyword])
+    this.router.navigate(['/compound-table-name/', this.drugKeyword])
   }
 
   targetSearchTypeChange(selectedType: string) {
@@ -100,13 +111,13 @@ export class SearchComponent implements OnInit {
 
   targetSubmit() {
     this.targetKeyword = this.targetKeyword.trim();
-    if (this.targetSelectedType === 'Target name') {
+    if (this.targetSelectedType === 'Target Name') {
       // this.globalService.gotoTargetList(TargetListParamType.target_name, {
       //   targetName: this.targetKeyword
       // });
       this.targetKeyword='?name='+this.targetKeyword
       this.router.navigate(['/target-table/', this.targetKeyword])
-    } else if (this.targetSelectedType === 'Target Id') {
+    } else if (this.targetSelectedType === 'Target ID') {
       this.targetKeyword='?tid='+this.targetKeyword
       this.router.navigate(['/target-table/', this.targetKeyword])
     } else if (this.targetSelectedType === 'Target Type') {
@@ -124,11 +135,11 @@ export class SearchComponent implements OnInit {
 
   pathwaySubmit() {
     this.pathwayKeyword = this.pathwayKeyword.trim();
-    if (this.pathwaySelectedType === 'Derivative name') {
+    if (this.pathwaySelectedType === 'Derivative Name') {
       this.pathwayKeyword='?search='+this.pathwayKeyword
       this.router.navigate(['/derivative-table/', this.pathwayKeyword])
     } else if (this.pathwaySelectedType === 'Derivative ID') {
-      this.pathwayKeyword='?der_id='+this.pathwayKeyword
+      this.pathwayKeyword='?mol_id='+this.pathwayKeyword
       this.router.navigate(['/derivative-table/', this.pathwayKeyword])
     }
   }
@@ -144,7 +155,8 @@ export class SearchComponent implements OnInit {
         }});
       } 
       else if(this.structureType === 'MMP'){
-        this.router.navigate(['/searchmmp/', this.jsme.smiles
+        this.jsme.smiles=`?pk1="${this.jsme.smiles}"`
+        this.router.navigate(['/mmps/', this.jsme.smiles
         ])
     }
       else if ( this.structureType === 'Substructure') {
@@ -215,7 +227,7 @@ export class SearchComponent implements OnInit {
     this.str1=`pk2=${this.form.value.amw1}${this.form.value.name1}${this.form.value.hbond1}${this.form.value.hbonda1}${this.form.value.rot1}`
     this.strr=`?pk=${this.amw}${this.slogp}${this.hbd}${this.hba}${this.rtb}&${this.str}&${this.str1}`
     console.log(this.form)
-    this.router.navigate(['/compound-table-name/', this.strr])
+    this.router.navigate(['/compound-table/', this.strr])
     console.log(this.strr)
 }
 }

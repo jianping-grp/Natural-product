@@ -12,8 +12,9 @@ import { AgGridAngular } from 'ag-grid-angular';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+  isLoading = true;
 params;
-num:number;
+count;
 private gridApi;
 private gridColumnApi;
 paginationPageSize=10;
@@ -23,18 +24,17 @@ sheetName1;
 columnDefs = [
   {headerName: 'Database Id', field: 'np_id', sortable: true, filter: true, width:238, },
   {headerName: 'Synonyms', field: 'synonyms', sortable: true, filter: true, width:238} ,
-  {headerName: 'Slogp', field: 'slogp', sortable: true, filter: true, width:238, },
-  {headerName: 'Mol Weight', field: 'amw', sortable: true, filter: true, width:238 },
-   {headerName: 'HBA', field: 'numhba', sortable: true, filter: true, width:238, },
-  {headerName: 'HBD', field: 'numhbd', sortable: true, filter: true, width:238 } ,
-  {headerName: 'Numrotatablebonds', field: 'numrotatablebonds', sortable: true, filter: true, width:238 } 
+  {headerName: 'Slogp', field: 'ALOGP', sortable: true, filter: true, width:238, },
+  {headerName: 'Mol Weight', field: 'MW', sortable: true, filter: true, width:238 },
+   {headerName: 'HBA', field: 'HBA', sortable: true, filter: true, width:238, },
+  {headerName: 'HBD', field: 'HBD', sortable: true, filter: true, width:238 } ,
+  {headerName: 'Numrotatablebonds', field: 'ROTB', sortable: true, filter: true, width:238 } 
 ];
-    toppings = new FormControl();
-    toppingList: string[] = ['canonical_smiles', 'Database Id','Synonyms', 'Slogp','Mol Weight','HBA','HBD',];
-    displayedColumns: string[] = ['canonical_smiles', 'Database Id','Synonyms', 'Slogp','Mol Weight',];
-    allColumns:string[] = ['canonical_smiles', 'Database Id','Synonyms', 'Slogp','Mol Weight','HBA','HBD','Numrotatablebonds','PSA','AROM','ALERTS','qed'];
+toppings = new FormControl();
+toppingList: string[] = ['Smiles', 'Database ID','AlogP','Mol Weight','HBA','HBD','Numrotatablebonds'];
+displayedColumns: string[] = ['Smiles', 'Database ID','AlogP','Mol Weight','HBA','HBD','Numrotatablebonds'];
+allColumns:string[] = ['Database ID','Smiles', 'Synonyms', 'AlogP','Mol Weight','HBA','HBD','Numrotatablebonds','PSA','AROM','ALERTS','qed','sascore','npscore','freesasa','max_phase'];
     images:any;
-    total_results:number;per_page:number;
     result1: string;
     // 分页
     pageMeta: PageMeta | null;
@@ -52,39 +52,47 @@ ngOnInit() {
     this.myrouter.paramMap.subscribe((params: ParamMap) => {
     console.log(params);
     this.result1 = params.get('id');
-    // this._getDrugs(0, this.pageSize); 
-    this._getDrugs2(0, this.pageSize); 
+    this._getDrugs(0, this.pageSize); 
   });
 }
 // 小搜索框的搜索方法
-// hqnew() {
-//       this.result1 = this.content.nativeElement.value;
-//       this._getDrugs2(0, this.pageSize);
-// }
-// private _getDrugs(page?, perPage?) {
-//     this.restservice.getDataList(`YNpDbLocal/?search=${this.result1}`, page, perPage)
-//     .subscribe(data => {
-//       this.images = data['np_db_locals'];
-//       this.pageMeta = data['meta'];
-//       console.log(this.images);
-//       console.log(this.pageMeta);
-//     });
-// }
-private _getDrugs2(page?, perPage?) {
-  this.restservice.getDataList(`NPChemInfo/${this.result1}`, page, perPage)
+private _getDrugs(page?, perPage?) {
+  this.restservice.getDataList(`MolChemInfoSearch/${this.result1}`, page, perPage)
   .subscribe(data => {
-    this.images = data['np_chem_info2s'];
-    console.log(data)
-    this.pageMeta= data['meta'];
-    // this.per_page=10
-    // this.pageMeta.total_results= data['count'];
-    console.log(data)
+    this.images = data['results'];
+    this.count = data['count'];
     console.log(this.images);
     console.log(this.pageMeta);
+    this.isLoading = false;
   });
 }
 pageChange(event) {
-  this._getDrugs2(event.pageIndex, event.pageSize);
+  this.isLoading = true;
+  this._getDrugs(event.pageIndex, event.pageSize);
 }
-
+  //跳转到化合物和衍生物详情
+  tiaozhuan(id){
+    console.log(id)
+    if(id.indexOf("N")!==-1){
+          this.myRouter.navigate(['/compound/',id])
+      }
+      else{
+           this.myRouter.navigate(['/Derivative/',id])
+      }
+   }
+// cellClicked(params){
+//   this.myRouter.navigateByUrl(`compound/${params.data.database_id}`)
+//   console.log(params)
+// }
+// onBtExport() {
+//   this.params = {
+//     fileName: this.fileName1,
+//     sheetName: this.sheetName1
+//   };
+//   this.gridApi.exportDataAsCsv(this.params);
+// }
+// onGridReady(params) {
+//   this.gridApi = params.api;
+//   this.gridColumnApi = params.columnApi;
+// }
 }

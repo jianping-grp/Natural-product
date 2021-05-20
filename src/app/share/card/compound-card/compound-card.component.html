@@ -10,7 +10,7 @@
                 [width]="'200px'"
                 [height]="'180px'"
                 [option]="'depict nozoom noshowdraganddropsymbolindepictmode useopenchemlib'"
-                [molString]="arr1?.canonical_smiles"
+                [molString]="arr1?.smiles"
       ></app-jsme>
     </td>
   </tr>
@@ -22,8 +22,8 @@
   </tr> -->
 </table>
 <div mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close (click)='detail($event)'
-         >Detail
+  <button mat-raised-button mat-dialog-close 
+         ><a [routerLink]="[url+data.moleculeChemblId]" target="_blank" routerLinkActive="router-link-active" >Detail</a>
   </button>
   <button mat-raised-button mat-dialog-close>Close</button>
 </div>

@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class CompoundCardComponent implements OnInit {
   // compound: Compound;  
+  url;
   moleculeStructure;
   arr1;
   arr2;
@@ -25,12 +26,13 @@ export class CompoundCardComponent implements OnInit {
 
   ngOnInit() {
     if(this.data.moleculeChemblId.indexOf('N')!=-1){
-      this.rest.getDataList(`NPChemInfo/?np_id=${this.data.moleculeChemblId}`)
+      this.rest.getDataList(`NPChemInfo/?mol_id=${this.data.moleculeChemblId}`)
       .subscribe(data => {
-        this.arr1 = data['np_chem_info2s'][0];
+        this.arr1 = data['mol_chem_info_alls'][0];
         // this.drug = data;
         // this.pageMeta = data['meta'];
         console.log(this.moleculeStructure);
+        this.url='/compound/'
       })
       // this.rest.getDataList(`NPIdOtherdb/?np_id=${this.data.moleculeChemblId}`)
       // .subscribe(data => {
@@ -40,12 +42,13 @@ export class CompoundCardComponent implements OnInit {
       // this.getNumNP(0,10)
     }
     else{
-      this.rest.getDataList(`DerChemInfo/?der_id=${this.data.moleculeChemblId}`)
+      this.rest.getDataList(`DerChemInfo/?mol_id=${this.data.moleculeChemblId}`)
       .subscribe(data => {
-        this.arr1 = data['der_chem_info2s'][0];
+        this.arr1 = data['mol_chem_info_alls'][0];
         // this.drug = data;
         // this.pageMeta = data['meta'];
         console.log(this.moleculeStructure);
+        this.url='/Derivative/'
       })
       // this.rest.getDataList(`DerIdOtherdb/?der_id=${this.data.moleculeChemblId}`)
       // .subscribe(data => {
@@ -54,22 +57,24 @@ export class CompoundCardComponent implements OnInit {
       // });
     }
   }
-  detail(event){
-    console.log(event)
-    if(this.data.moleculeChemblId.indexOf('N')!=-1){
-      // this.rest.getDataList(`NPChemInfo/?np_id=${this.data.moleculeChemblId}`)
-      // .subscribe(data => {
-      //   this.arr1 = data['np_chem_info2s'][0];
-      //   console.log(this.moleculeStructure);
-      this.router.navigate(['/compound/',this.data.moleculeChemblId])
-      // })
+  // detail(event){
+  //   console.log(event)
+  //   if(this.data.moleculeChemblId.indexOf('N')!=-1){
+  //     // this.rest.getDataList(`NPChemInfo/?np_id=${this.data.moleculeChemblId}`)
+  //     // .subscribe(data => {
+  //     //   this.arr1 = data['np_chem_info2s'][0];
+  //     //   console.log(this.moleculeStructure);
+      
+  //     // this.router.navigate(['/compound/',this.data.moleculeChemblId])
+  //     // })
 
 
-    }
-    else{
-      this.router.navigate(['/Derivative/',this.data.moleculeChemblId])
-    }
-  }
+  //   }
+  //   else{
+  //     // this.router.navigate(['/Derivative/',this.data.moleculeChemblId])
+      
+  //   }
+  // }
   kclose() {
     this.dialogRef.close();
   }

@@ -4,12 +4,14 @@ import {PageMeta} from '../../../../models/page-meta';
 import {MatDialog} from '@angular/material';
 import {TargetCardComponent} from '../../../../share/card/target-card/target-card.component';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {DocCardComponent} from '../../../../share/card/doc-card/doc-card.component';
 @Component({
   selector: 'app-b-derivative',
   templateUrl: './b-derivative.component.html',
   styleUrls: ['./b-derivative.component.css']
 })
 export class BDerivativeComponent implements OnInit {
+  isLoading = true;
   arr  = [];
   result1 = 'D127771';
   pageMeta: PageMeta | null;
@@ -28,18 +30,28 @@ export class BDerivativeComponent implements OnInit {
     // this.getName(0,10)
   }
 getData(page, perPage){
-  this.restservice.getDataList(`DerAct/?der_id=${this.result1}`, page, perPage)
+  this.restservice.getDataList(`DerAct/?mol_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.arr=data['der_act2s'],
+      this.arr=data['mol_act_relateds'],
       this.pageMeta=data['meta']
       console.log(this.arr)
+      this.isLoading = false; 
   });
 }
 pageChange(event) {
+  this.isLoading = true;
   this.getData( event.pageIndex, event.pageSize);
 }
 openMoleculePropertiesDialog(moleculeChemblId: number | string) {
   this.dialog.open(TargetCardComponent, {
+    width: '800px',
+    data: {
+      moleculeChemblId: moleculeChemblId
+    }
+  })
+}
+openDocDialog(moleculeChemblId: number | string) {
+  this.dialog.open(DocCardComponent, {
     width: '800px',
     data: {
       moleculeChemblId: moleculeChemblId

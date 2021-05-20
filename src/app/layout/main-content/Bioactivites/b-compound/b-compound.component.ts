@@ -4,12 +4,14 @@ import {PageMeta} from '../../../../models/page-meta';
 import {MatDialog} from '@angular/material';
 import {TargetCardComponent} from '../../../../share/card/target-card/target-card.component';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {DocCardComponent} from '../../../../share/card/doc-card/doc-card.component';
 @Component({
   selector: 'app-b-compound',
   templateUrl: './b-compound.component.html',
   styleUrls: ['./b-compound.component.css']
 })
 export class BCompoundComponent implements OnInit {
+  isLoading = true;
   arr = [];
   result1 = 'NP332203';
   name = '';
@@ -28,25 +30,35 @@ export class BCompoundComponent implements OnInit {
       this.getName(0,10)
     }
   getData(page, perPage){
-  this.restservice.getDataList(`NPAct/?np_id=${this.result1}`, page, perPage)
+  this.restservice.getDataList(`NPAct/?mol_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.arr=data['np_act2s'],
+      this.arr=data['mol_act_relateds'],
       this.pageMeta=data['meta']
        console.log(this.arr)
+       this.isLoading = false; 
    });
   }
   getName(page, perPage){
-  this.restservice.getDataList(`NPChemInfo/?np_id=${this.result1}`, page, perPage)
+  this.restservice.getDataList(`NPChemInfo/?mol_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-    this.name = data['np_chem_info2s'][0]['synonyms'];
+    this.name = data['mol_chem_info_alls'][0]['synonyms'];
     console.log(this.name);
   });
   }
   pageChange(event) {
+    this.isLoading = true;
   this.getData( event.pageIndex, event.pageSize);
   }
   openMoleculePropertiesDialog(moleculeChemblId: number | string) {
   this.dialog.open(TargetCardComponent, {
+    width: '800px',
+    data: {
+      moleculeChemblId: moleculeChemblId
+    }
+  })
+}
+openDocDialog(moleculeChemblId: number | string) {
+  this.dialog.open(DocCardComponent, {
     width: '800px',
     data: {
       moleculeChemblId: moleculeChemblId

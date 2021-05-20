@@ -1,13 +1,16 @@
 <h4>The following targets are reported to interact with {{result1}} </h4>
 
-<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table-bordered" >
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table-bordered" 
+[el-loading]="isLoading"[text]="'It’s loading'">
   <tr>
     <th>Target</th>
-    <th>Bioactivites</th>
+    <th>Activity Type</th>
     <!--<th>pChembl value</th>-->
-    <th>Value</th>
-    <th>Assay Id</th>
-    <th>Doc Id</th>
+    
+    <th>Activity Value</th>
+    <th>Activity Comment</th>
+    <th>Assay ID</th>
+    <th>Doc ID</th>
   </tr>
   <tr *ngFor='let ar of arr'>
     <td> 
@@ -21,22 +24,29 @@
   </td>
   <td>
   <ng-container >
-      <p>{{ar?.der_activity_value}}
+      <p>{{ar?.activity_value}}
         <!-- <a href="https://doi.org/{{ar?.doc_doi}}" target="_blank">{{ar?.reference}}</a> -->
           <!-- <button mat-button color="primary" (click)="openDocDialog(mole?.id)">(Detail)</button> -->
       </p>
     </ng-container>
   </td>
   <td>
+    <ng-container >
+      <p>{{ar?.activity_comment}}
+        <!-- <a href="https://doi.org/{{ar?.doc_doi}}" target="_blank">{{ar?.reference}}</a> -->
+          <!-- <button mat-button color="primary" (click)="openDocDialog(mole?.id)">(Detail)</button> -->
+      </p>
+    </ng-container>
+   </td>
+  <td>
     <ng-container>
-        <p><a href="{{ar?.assay_url}}" target="_blank">{{ar?.assay_id}}</a>&nbsp;&nbsp;&nbsp;</p>
+        <p><a  [routerLink]="['/assay/'+ar.assay_id]" target="_blank" routerLinkActive="router-link-active">{{ar?.assay_id}}</a>&nbsp;&nbsp;&nbsp;</p>
       </ng-container>
 </td>
 <td>
-  <ng-container>
-      <p><a href="https://www.ebi.ac.uk/chembl/document_report_card/{{ar?.doc_id}}" target="_blank">
-        {{ar?.doc_id}}  </a>&nbsp;&nbsp;&nbsp;</p>
-    </ng-container>
+  <button mat-button color="primary" (click)="openDocDialog(ar?.doc_id)">
+    {{ar?.doc_id}}
+  </button>
 </td>
   </tr>
 </table>

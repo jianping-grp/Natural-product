@@ -21,7 +21,15 @@ import {TargetPredictionComponent} from './layout/main-content/target-prediction
 import {ChemicalScreeningComponent} from './layout/main-content/chemical-screening/chemical-screening.component';
 import {TPResultComponent} from './layout/main-content/t-p-result/t-p-result.component';
 import {DerivativeComponent} from './layout/main-content/derivative/derivative.component';
-
+import {ScaffoldSearchComponent} from './layout/main-content/scaffold/scaffold-search/scaffold-search.component';
+import {ScaffoldResultComponent} from './layout/main-content/scaffold/scaffold-result/scaffold-result.component';
+import {ScaffoldDetailComponent} from './layout/main-content/scaffold/scaffold-detail/scaffold-detail.component';
+import {ScaffoldTargetComponent} from './layout/main-content/scaffold/scaffold-target/scaffold-target.component';
+import {NewmolSearchComponent} from './layout/main-content/new-mol/newmol-search/newmol-search.component';
+import {NewmolResultComponent} from './layout/main-content/new-mol/newmol-result/newmol-result.component';
+import {NewmolDetailComponent} from './layout/main-content/new-mol/newmol-detail/newmol-detail.component';
+import {MmpSingleComponent} from './layout/main-content/mmp-single/mmp-single.component';
+import {MmpDComponent} from './layout/main-content/mmp-d/mmp-d.component';
 
 const routes: Routes = [
   {
@@ -77,6 +85,14 @@ const routes: Routes = [
     component:SearchMmpComponent
   },
   {
+    path:'mmps/:id',
+    component:MmpSingleComponent
+  },
+  {
+    path:'mmpd/:id',
+    component:MmpDComponent
+  },
+  {
     path:'BCompound/:id',
     component:BCompoundComponent
   },
@@ -97,7 +113,34 @@ const routes: Routes = [
     path:'contact',
     component:  ContactComponent
   },
-
+  {
+    path:'scaffold',
+    component:  ScaffoldSearchComponent
+  },
+  {
+    path:'scaffoldr',
+    component:  ScaffoldResultComponent
+  },
+  {
+    path:'scaffoldd',
+    component:  ScaffoldDetailComponent
+  },
+  {
+    path:'scaffoldt',
+    component:  ScaffoldTargetComponent
+  },
+  {
+    path:'newmol',
+    component:  NewmolSearchComponent
+  },
+  {
+    path:'newmolr',
+    component:  NewmolResultComponent
+  },
+  {
+    path:'newmold/:id',
+    component:  NewmolDetailComponent
+  },
   {
     path:'tp',
     component:    TargetPredictionComponent

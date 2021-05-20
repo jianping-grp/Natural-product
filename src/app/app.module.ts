@@ -39,6 +39,19 @@ import { SearchMmpComponent } from './layout/main-content/search-mmp/search-mmp.
 import { HelpComponent } from './layout/help/help.component';
 import { AssayComponent } from './layout/main-content/assay/assay.component';
 import { CompoundCardComponent } from './share/card/compound-card/compound-card.component';
+import { MmpCardComponent } from './share/card/mmp-card/mmp-card.component';
+import { ScaffoldSearchComponent } from './layout/main-content/scaffold/scaffold-search/scaffold-search.component';
+import { NewmolSearchComponent } from './layout/main-content/new-mol/newmol-search/newmol-search.component';
+import { NewmolResultComponent } from './layout/main-content/new-mol/newmol-result/newmol-result.component';
+import { NewmolDetailComponent } from './layout/main-content/new-mol/newmol-detail/newmol-detail.component';
+import { ScaffoldResultComponent } from './layout/main-content/scaffold/scaffold-result/scaffold-result.component';
+import { ScaffoldDetailComponent } from './layout/main-content/scaffold/scaffold-detail/scaffold-detail.component';
+import { ScaffoldTargetComponent } from './layout/main-content/scaffold/scaffold-target/scaffold-target.component';
+import { NewmolCardComponent } from './share/card/newmol-card/newmol-card.component';
+import { PropertiesCardDComponent } from './share/card/properties-card-d/properties-card-d.component';
+import { DocCardComponent } from './share/card/doc-card/doc-card.component';
+import { MmpSingleComponent } from './layout/main-content/mmp-single/mmp-single.component';
+import { MmpDComponent } from './layout/main-content/mmp-d/mmp-d.component';
 // import {NgxLoadingModule} from 'ngx-loading';
 @NgModule({
   declarations: [
@@ -69,6 +82,19 @@ import { CompoundCardComponent } from './share/card/compound-card/compound-card.
     SearchMmpComponent,
     HelpComponent,
     AssayComponent,
+    MmpCardComponent,
+    ScaffoldSearchComponent,
+    NewmolSearchComponent,
+    NewmolResultComponent,
+    NewmolDetailComponent,
+    ScaffoldResultComponent,
+    ScaffoldDetailComponent,
+    ScaffoldTargetComponent,
+    NewmolCardComponent,
+    PropertiesCardDComponent,
+    DocCardComponent,
+    MmpSingleComponent,
+    MmpDComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +109,7 @@ import { CompoundCardComponent } from './share/card/compound-card/compound-card.
     FileUploadModule
 
   ],
-  entryComponents: [PropertiesCardComponent,TargetCardComponent,CompoundCardComponent],
+  entryComponents: [PropertiesCardComponent,TargetCardComponent,CompoundCardComponent,MmpCardComponent,NewmolCardComponent,PropertiesCardDComponent,DocCardComponent],
   providers: [
     GlobalService,
     RestService

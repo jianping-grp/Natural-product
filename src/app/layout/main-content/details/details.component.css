@@ -30,7 +30,7 @@ a{
     box-shadow:none;
   }
   .demo-chart{
-    width:500px;
+    width:750px;
   }
   .ag-row-hover {
     /* putting in !important so it overrides the theme's styling as it hovers the row also */
@@ -52,3 +52,17 @@ a{
   width:1024px;
   overflow: scroll;
 } */
+.network-table {
+  min-height: 630px;
+}
+.mdl-data-table {
+  margin: auto;
+}
+.grid-border {
+  min-height: 300px;
+  border: 1px solid #ddd;
+}
+
+.jsme-border {
+  border: 1px solid #ddd;
+}

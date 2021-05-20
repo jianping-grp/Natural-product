@@ -23,3 +23,12 @@ a{
     /* overflow: hidden; */
     overflow-x: scroll;
     }
+.echarts{
+        height:1000px;
+    }
+.network-table {
+        min-height: 630px;
+      }
+.mdl-data-table {
+        margin: auto;
+      }

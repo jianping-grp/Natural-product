@@ -1,0 +1,160 @@
+<h3 class="text-position">MMP Search Results</h3>
+<h4>Related Natural Products and Derivatives MMP Information</h4>
+<table mat-table [dataSource]="images" 
+matSort
+[el-loading]="isLoading"[text]="'It’s loading'"
+
+class="mat-elevation-z8">
+<ng-container matColumnDef="Database Id1">
+  <th mat-header-cell *matHeaderCellDef > Database ID 1 </th>
+  <td mat-cell *matCellDef="let element">
+    <button mat-button color="primary" (click)="tiaozhuan(element.mol_id1)">{{element.mol_id1}}</button>
+  <!-- <a  [routerLink]="['/Derivative/'+element.mol_id1]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id1}}</a>  -->
+</td>
+</ng-container>
+<ng-container matColumnDef="Database Id2">
+	<th mat-header-cell *matHeaderCellDef > Database ID 2 </th>
+	<td mat-cell *matCellDef="let element">
+    <button mat-button color="primary" (click)="tiaozhuan(element.mol_id2)">{{element.mol_id2}}</button>
+	<!-- <a  [routerLink]="['/compound/'+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.mol_id2}}</a> -->
+ </td>
+  </ng-container>
+  <ng-container matColumnDef="compound1 Structure">
+    <th mat-header-cell *matHeaderCellDef> Compound Structure 1</th>
+    <td mat-cell *matCellDef="let element">
+      <app-jsme [elementId]="element?.id+'c1'"
+      [width]="'100px'"
+      [height]="'160px'"
+      [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element.mol_id1_smiles"
+  ></app-jsme></td>
+  </ng-container>
+  <ng-container matColumnDef="compound2 Structure">
+    <th mat-header-cell *matHeaderCellDef> Compound Structure 2</th>
+    <td mat-cell *matCellDef="let element">
+      <app-jsme [elementId]="element?.id+'c2'"
+      [width]="'100px'"
+      [height]="'160px'"
+      [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element.mol_id2_smiles"
+  ></app-jsme></td>
+  </ng-container>
+<ng-container matColumnDef="Structure">
+  <th mat-header-cell *matHeaderCellDef> Core Structure</th>
+  <td mat-cell *matCellDef="let element">
+    <app-jsme [elementId]="element?.id+'core'"
+    [width]="'100px'"
+    [height]="'160px'"
+    [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+    [molString]="element?.core | toR"
+></app-jsme></td>
+</ng-container>
+
+  <ng-container matColumnDef="MMP">
+    <th mat-header-cell *matHeaderCellDef >Transformation</th>
+    <td mat-cell *matCellDef="let element">    <app-jsme [elementId]="element?.id+'mmp'"
+      [width]="'200px'"
+      [height]="'160px'"
+      [option]="'reaction depict nozoom noshowdraganddropsymbolindepictmode'"
+      [molString]="element?.mmp | toR"
+  ></app-jsme></td>
+  </ng-container>
+  <!-- <ng-container matColumnDef="tid">
+    <th mat-header-cell *matHeaderCellDef > Target Id </th>
+    <td mat-cell *matCellDef="let element">
+    <a  [routerLink]="['/target/'+element.tid]" target="_blank" routerLinkActive="router-link-active">{{element.tid}}</a> </td>
+  </ng-container> -->
+  <!-- <ng-container matColumnDef="Assay Id">
+    <th mat-header-cell *matHeaderCellDef> Assay ID</th>
+    <td mat-cell *matCellDef="let element">
+      <a  [routerLink]="['/assay/'+element.assay_id]" target="_blank" routerLinkActive="router-link-active">{{element.assay_id}}</a>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="Doc Id">
+    <th mat-header-cell *matHeaderCellDef> Doc ID</th>
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-button color="primary" (click)="openDocDialog(element?.doc_id)">
+        {{element?.doc_id}}
+      </button>
+     </td>
+  </ng-container>
+  <ng-container matColumnDef="activity_type">
+    <th mat-header-cell *matHeaderCellDef> Activity Type</th>
+    <td mat-cell *matCellDef="let element"> {{element.activity_type}} </td>
+  </ng-container>-->
+  
+    <ng-container matColumnDef="activity_value">
+      <th mat-header-cell *matHeaderCellDef >Activity Information</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- <a  [routerLink]="['/searchmmp/'+mol_id1=element.mol_id1+&+element.mol_id2]" target="_blank" routerLinkActive="router-link-active">{{element.assay_id}}</a> -->
+        <button mat-button color="primary" (click)="tiaozhuan2(element.mol_id1,element.mol_id2)">Activity Information</button> </td>
+    </ng-container> 
+    <ng-container matColumnDef="MW">
+      <th mat-header-cell *matHeaderCellDef> Mol Weight</th>
+      <td mat-cell *matCellDef="let element"> {{element.MW}} </td>
+    </ng-container>
+    <ng-container matColumnDef="PSA">
+      <th mat-header-cell *matHeaderCellDef> PSA</th>
+      <td mat-cell *matCellDef="let element"> {{element.PSA}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ALOGP">
+      <th mat-header-cell *matHeaderCellDef > AlogP </th>
+      <td mat-cell *matCellDef="let element"> {{element.ALOGP}} </td>
+    </ng-container>
+    <ng-container matColumnDef="HBD">
+      <th mat-header-cell *matHeaderCellDef > HBD </th>
+      <td mat-cell *matCellDef="let element"> {{element.HBD}} </td>
+    </ng-container>
+    <ng-container matColumnDef="HBA">
+      <th mat-header-cell *matHeaderCellDef> HBA</th>
+      <td mat-cell *matCellDef="let element"> {{element.HBA}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="ROTB">
+      <th mat-header-cell *matHeaderCellDef> ROTB</th>
+      <td mat-cell *matCellDef="let element"> {{element.ROTB}} </td>
+    </ng-container>
+    <ng-container matColumnDef="AROM">
+      <th mat-header-cell *matHeaderCellDef> AROM</th>
+      <td mat-cell *matCellDef="let element"> {{element.AROM}} </td>
+    </ng-container>
+      <ng-container matColumnDef="ALERTS">
+      <th mat-header-cell *matHeaderCellDef> ALERTS</th>
+      <td mat-cell *matCellDef="let element"> {{element.ALERTS}} </td>
+    </ng-container>
+    <ng-container matColumnDef="qed">
+      <th mat-header-cell *matHeaderCellDef> QED</th>
+      <td mat-cell *matCellDef="let element"> {{element.qed}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sascore">
+      <th mat-header-cell *matHeaderCellDef> Sascore</th>
+      <td mat-cell *matCellDef="let element"> {{element.sascore}} </td>
+    </ng-container>
+    <ng-container matColumnDef="npscore">
+      <th mat-header-cell *matHeaderCellDef> Npscore</th>
+      <td mat-cell *matCellDef="let element"> {{element.npscore}} </td>
+    </ng-container>
+    <ng-container matColumnDef="freesasa">
+      <th mat-header-cell *matHeaderCellDef> Freesasa</th>
+      <td mat-cell *matCellDef="let element"> {{element.freesasa}} </td>
+    </ng-container>
+    <ng-container matColumnDef="max_phase">
+      <th mat-header-cell *matHeaderCellDef> Max Phase</th>
+      <td mat-cell *matCellDef="let element"> {{element.max_phase}} </td>
+    </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsb;sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsb;"></tr>
+</table>
+<div class="mdl-cell mdl-cell--12-col">
+  <mat-form-field class="mdl-cell mdl-cell--2-col">
+    <mat-select placeholder="Custom displayed columns" multiple [(ngModel)]="displayedColumnsb">
+      <mat-option *ngFor="let column of allColumns" [value]="column">
+        {{column}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-paginator [length]="count"
+  [pageSize]="10"
+  [pageSizeOptions]="[10,20,50,100]"
+  (page)="pageChange($event)"
+></mat-paginator></div>

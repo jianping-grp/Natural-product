@@ -1,0 +1,22 @@
+.smile-container {
+    width: 95%;
+    height: 150px;
+    float: right;
+    margin-bottom: 0.5cm;
+  }
+  .content-center {
+    height: 240px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  h2{
+    text-align: center;
+  }
+  .col-md-2{
+    margin-top:50px;
+  }
+  .text-position{
+    text-align: center;
+  }
+  

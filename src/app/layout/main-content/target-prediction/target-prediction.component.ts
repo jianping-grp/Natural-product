@@ -29,7 +29,8 @@ public uploder: FileUploader = new FileUploader({
   itemAlias: "query_file"
 });
 ngOnInit() {
-  this.jsmeSmiles = '';
+  this.jsmeSmiles = 'c1ccccc1';
+  // this.jsmeSmiles = '';
   this.createForm();
   // this._getTargetName();
 }
@@ -119,7 +120,7 @@ onSubmit() {
     if (a + b < 0) {
       alert('Please submit MDL sdf or SMILES format file!')
     } else if (this.inputFile.size > 41943040) {
-      alert('please submit less than 40M file!')
+      alert('Please submit less than 40M file!')
     } else {
       console.log('成功')
       this.uploaderFile();
