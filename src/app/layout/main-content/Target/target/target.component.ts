@@ -9,12 +9,31 @@ import {Node} from '../../../../models/node';
 import {Link} from '../../../../models/link';
 import {Subscription} from 'rxjs/Subscription';
 import {CompoundCardComponent} from '../../../../share/card/compound-card/compound-card.component';
+import {environment} from '../../../../../environments/environment';
 @Component({
   selector: 'app-target',
   templateUrl: './target.component.html',
   styleUrls: ['./target.component.css']
 })
 export class TargetComponent implements OnInit {
+  private restHost = environment.REST_HOST;
+  count1
+  selected = 'MW'
+  foods= [
+    {value: 'MW', viewValue: 'MW'},
+    {value: 'ALOGP', viewValue: 'ALOGP'},
+    {value: 'HBD', viewValue: 'HBD'},
+    {value: 'HBA', viewValue: 'HBA'},
+    {value: 'ROTB', viewValue: 'ROTB'},
+    {value: 'PSA', viewValue: 'PSA'},
+    {value: 'AROM', viewValue: 'AROM'},
+    {value: 'ALERTS', viewValue: 'ALERTS'},
+    {value: 'qed', viewValue: 'qed'},
+    {value: 'sascore', viewValue: 'sascore'},
+    {value: 'npscore', viewValue: 'npscore'},
+    {value: 'freesasa', viewValue: 'freesasa'},
+    {value: 'max_phase', viewValue: 'max_phase'},
+  ];
   count
   drugs
   id
@@ -291,7 +310,7 @@ export class TargetComponent implements OnInit {
         })
       }
       updateNetworkData(){
-        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'&ptype=ALOGP'
+        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'&ptype='+this.selected
         this.result1=this.result1+'&range='+this.key
         console.log(this.result1)
         if(this.showStructure==true){
@@ -322,9 +341,9 @@ export class TargetComponent implements OnInit {
 private _getDrugsb(page?, perPage?) {
   this.restservice.getDataList(`MMPAll/?tid=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.images1=data['mmp_all_news'],
-      this.pageMeta=data['meta'],
-      console.log(this.images)
+      this.images1=data['results'],
+      this.count1=data['count'],
+      console.log(this.images1)
       this.isLoading = false;
   });
 }

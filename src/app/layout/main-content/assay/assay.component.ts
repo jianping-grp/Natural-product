@@ -10,6 +10,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {MatDialog} from '@angular/material';
 import {CompoundCardComponent} from '../../../share/card/compound-card/compound-card.component';
 import {DocCardComponent} from '../../../share/card/doc-card/doc-card.component'
+import {environment} from '../../../../environments/environment';
 interface Food {
   value: string;
   viewValue: string;
@@ -20,14 +21,28 @@ interface Food {
   styleUrls: ['./assay.component.css']
 })
 export class AssayComponent implements OnInit {
+  private restHost = environment.REST_HOST;
+  count
+  selected = 'MW'
+  foods= [
+    {value: 'MW', viewValue: 'MW'},
+    {value: 'ALOGP', viewValue: 'ALOGP'},
+    {value: 'HBD', viewValue: 'HBD'},
+    {value: 'HBA', viewValue: 'HBA'},
+    {value: 'ROTB', viewValue: 'ROTB'},
+    {value: 'PSA', viewValue: 'PSA'},
+    {value: 'AROM', viewValue: 'AROM'},
+    {value: 'ALERTS', viewValue: 'ALERTS'},
+    {value: 'qed', viewValue: 'qed'},
+    {value: 'sascore', viewValue: 'sascore'},
+    {value: 'npscore', viewValue: 'npscore'},
+    {value: 'freesasa', viewValue: 'freesasa'},
+    {value: 'max_phase', viewValue: 'max_phase'},
+  ];
   id
   isLoading = true;
   isLoading2 = true;
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+
   result1: string;
   atr: string;
   num:number;
@@ -305,7 +320,7 @@ export class AssayComponent implements OnInit {
         })
       }
       updateNetworkData(){
-        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'+PSA:'+this.psaMin+'~'+this.psaMax+'+AROM:'+this.aromMin+'~'+this.aromMax+'+ALERTS:'+this.alertsMin+'~'+this.alertsMax+'+qed:'+this.qedMin+'~'+this.qedMax+'+sascore:'+this.sasMin+'~'+this.sasMax+'+npscore:'+this.npMin+'~'+this.npMax+'+freesasa:'+this.freeMin+'~'+this.freeMax+'+max_phase:'+this.phaseMin+'~'+this.phaseMax+'&ptype=ALOGP'
+        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'+PSA:'+this.psaMin+'~'+this.psaMax+'+AROM:'+this.aromMin+'~'+this.aromMax+'+ALERTS:'+this.alertsMin+'~'+this.alertsMax+'+qed:'+this.qedMin+'~'+this.qedMax+'+sascore:'+this.sasMin+'~'+this.sasMax+'+npscore:'+this.npMin+'~'+this.npMax+'+freesasa:'+this.freeMin+'~'+this.freeMax+'+max_phase:'+this.phaseMin+'~'+this.phaseMax+'&ptype='+this.selected
         this.atr=this.result1+'&range='+this.key
         console.log(this.atr)
         if(this.showStructure==true){
@@ -325,6 +340,7 @@ export class AssayComponent implements OnInit {
   private _getDrugs() {
     this.restservice.getDataList(`assayinfo/?assay_id=${this.result1}`)
     .subscribe(data => {
+      console.log(data);
       this.images = data['assay_info_news'];
       // this.compounds=data["meta"]["total_results"]
       console.log(this.images);
@@ -335,9 +351,9 @@ export class AssayComponent implements OnInit {
 private _getDrugsb(page?, perPage?) {
   this.restservice.getDataList(`MMPAll/?assay_id=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.images1=data['mmp_all_news'],
-      this.pageMeta=data['meta'],
-      console.log(this.images)
+      this.images1=data['results'],
+      this.count=data['count'],
+      console.log(this.images1)
       this.isLoading = false;
   });
 }

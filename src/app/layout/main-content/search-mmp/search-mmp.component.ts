@@ -5,12 +5,14 @@ import {PageMeta} from '../../../models/page-meta';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {MatDialog} from '@angular/material';
 import {DocCardComponent} from '../../../share/card/doc-card/doc-card.component'
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-search-mmp',
   templateUrl: './search-mmp.component.html',
   styleUrls: ['./search-mmp.component.css']
 })
 export class SearchMmpComponent implements OnInit {
+  private restHost = environment.REST_HOST;
   isLoading = true;
   result1;
   count;
@@ -40,8 +42,9 @@ export class SearchMmpComponent implements OnInit {
   private _getDrugsb(page?, perPage?) {
     this.restservice.getDataList(`MMPAll/${this.result1}`, page, perPage)
     .subscribe(data => {
-        this.images=data['mmp_all_news'],
-        this.pageMeta=data['meta'],
+        this.images=data['results'],
+        this.count=data['count'],
+        
         console.log(this.images)
         this.isLoading = false;
     });

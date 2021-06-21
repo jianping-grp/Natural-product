@@ -30,9 +30,9 @@ a{
         min-height: 630px;
       }
       .mdl-data-table {
+        white-space: normal;
+        width: 100%;
         margin: auto;
-        width:1084px;
-        overflow-x:scroll
       }
       /* .gr{
         width: 1024px;

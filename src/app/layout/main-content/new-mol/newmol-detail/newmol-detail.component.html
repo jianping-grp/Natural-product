@@ -30,7 +30,7 @@
 </div>
 </div>
 <!--表格-->
-<a href="http://60.28.101.176:9004/MolFragExchange/?core='{{core}}'&sub='{{sub}}'&download=yes" class='down' download="文件名.csv"><h5>Click on the download</h5></a> 
+<a href="{{restHost}}/MolFragExchange/?core='{{core}}'&sub='{{sub}}'&download=yes" class='down' download="文件名.csv"><h5>Click on the download</h5></a> 
 <div  class = 'example-container mat-elevation-z8' > 
   <table mat-table [dataSource]="images" 
   matSort [el-loading]="isLoading"[text]="'It’s loading'"

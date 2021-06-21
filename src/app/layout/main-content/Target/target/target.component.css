@@ -30,5 +30,7 @@ a{
         min-height: 630px;
       }
 .mdl-data-table {
+        white-space: normal;
+        width: 100%;
         margin: auto;
-      }
+}

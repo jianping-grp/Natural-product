@@ -13,12 +13,31 @@ import {Subscription} from 'rxjs/Subscription';
 import {MatDialog} from '@angular/material';
 import {CompoundCardComponent} from '../../../share/card/compound-card/compound-card.component';
 import {DocCardComponent} from '../../../share/card/doc-card/doc-card.component'
+import {environment} from '../../../../environments/environment';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  private restHost = environment.REST_HOST;
+  countf
+  selected = 'MW'
+  foods= [
+    {value: 'MW', viewValue: 'MW'},
+    {value: 'ALOGP', viewValue: 'ALOGP'},
+    {value: 'HBD', viewValue: 'HBD'},
+    {value: 'HBA', viewValue: 'HBA'},
+    {value: 'ROTB', viewValue: 'ROTB'},
+    {value: 'PSA', viewValue: 'PSA'},
+    {value: 'AROM', viewValue: 'AROM'},
+    {value: 'ALERTS', viewValue: 'ALERTS'},
+    {value: 'qed', viewValue: 'qed'},
+    {value: 'sascore', viewValue: 'sascore'},
+    {value: 'npscore', viewValue: 'npscore'},
+    {value: 'freesasa', viewValue: 'freesasa'},
+    {value: 'max_phase', viewValue: 'max_phase'},
+  ];
   scaffold
   drugs
   counts
@@ -76,6 +95,10 @@ export class DetailsComponent implements OnInit {
   arr11;
   arr12;
   arr13;
+  arr14;
+  arr15
+  source3
+  source4
   source;
   source1;
   source2;
@@ -289,9 +312,13 @@ export class DetailsComponent implements OnInit {
           this.arr11 = data['mol_id_otherdbs'][0];
           this.arr12 = data['mol_id_otherdbs'][1];
           this.arr13= data['mol_id_otherdbs'][2];
+          this.arr14= data['mol_id_otherdbs'][3];
+          this.arr15= data['mol_id_otherdbs'][4];
           this.source=data['mol_id_otherdbs'][0]['db_source'].toUpperCase()
           this.source1=data['mol_id_otherdbs'][1]['db_source'].toUpperCase()
           this.source2=data['mol_id_otherdbs'][2]['db_source'].toUpperCase()
+          this.source3=data['mol_id_otherdbs'][3]['db_source'].toUpperCase()
+          this.source4=data['mol_id_otherdbs'][4]['db_source'].toUpperCase()
           console.log(this.arr11);
         });
 // 获取当前化合物的衍生物
@@ -346,8 +373,8 @@ export class DetailsComponent implements OnInit {
 private _getDrugsb(page?, perPage?) {
   this.restservice.getDataList(`MMPAll/?mol_id1=${this.result1}`, page, perPage)
   .subscribe(data => {
-      this.images=data['mmp_all_news'],
-      this.pageMeta=data['meta'],
+      this.images=data['results'],
+      this.countf=data['count'],
       // this.size=this.images.length-1;
       // this.size=this.size+1
       // this.count=this.count*this.size
@@ -633,7 +660,7 @@ private _getDrugss(page?, perPage?) {
       }
       updateNetworkData(){
         // this.key=''
-        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'+PSA:'+this.psaMin+'~'+this.psaMax+'+AROM:'+this.aromMin+'~'+this.aromMax+'+ALERTS:'+this.alertsMin+'~'+this.alertsMax+'+qed:'+this.qedMin+'~'+this.qedMax+'+sascore:'+this.sasMin+'~'+this.sasMax+'+npscore:'+this.npMin+'~'+this.npMax+'+freesasa:'+this.freeMin+'~'+this.freeMax+'+max_phase:'+this.phaseMin+'~'+this.phaseMax+'&ptype=ALOGP'
+        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'+PSA:'+this.psaMin+'~'+this.psaMax+'+AROM:'+this.aromMin+'~'+this.aromMax+'+ALERTS:'+this.alertsMin+'~'+this.alertsMax+'+qed:'+this.qedMin+'~'+this.qedMax+'+sascore:'+this.sasMin+'~'+this.sasMax+'+npscore:'+this.npMin+'~'+this.npMax+'+freesasa:'+this.freeMin+'~'+this.freeMax+'+max_phase:'+this.phaseMin+'~'+this.phaseMax+'&ptype='+this.selected
         this.atr=this.result1+'&range='+this.key
         console.log(this.result1)
         console.log(this.dl)
@@ -642,4 +669,6 @@ private _getDrugss(page?, perPage?) {
         }
         else{this.getNetworkData(this.atr);}
            }
+
+
 }

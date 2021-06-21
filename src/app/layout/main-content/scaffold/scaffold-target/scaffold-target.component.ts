@@ -18,7 +18,7 @@ export class ScaffoldTargetComponent implements OnInit {
   result1:any;
   target
   meta:PageMeta[];
-  displayedColumns: string[] = ['mol_id','assay_id','target_id','activity_type','activity_value','doc_id'];
+  displayedColumns: string[] = ['mol_id',"compound Structure",'assay_id','target_id','activity_type','activity_value','doc_id'];
     constructor(
       private myrouter: ActivatedRoute,
       public dialog: MatDialog,
@@ -90,6 +90,15 @@ export class ScaffoldTargetComponent implements OnInit {
     }
     
   }
+  tiaozhuan(id){
+    console.log(id)
+    if(id.indexOf("N")!==-1){
+          this.router.navigate(['/compound/',id])
+      }
+      else{
+           this.router.navigate(['/Derivative/',id])
+      }
+   }
   openDocDialog(moleculeChemblId: number | string) {
     this.dialog.open(DocCardComponent, {
       width: '800px',

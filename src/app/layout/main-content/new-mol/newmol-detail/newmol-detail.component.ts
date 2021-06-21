@@ -3,12 +3,14 @@ import {RestService} from '../../../../service/rest/rest.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {NewmolCardComponent} from '../../../../share/card/newmol-card/newmol-card.component';
+import {environment} from '../../../../../environments/environment';
 @Component({
   selector: 'app-newmol-detail',
   templateUrl: './newmol-detail.component.html',
   styleUrls: ['./newmol-detail.component.css']
 })
 export class NewmolDetailComponent implements OnInit {
+  private restHost = environment.REST_HOST;
   isLoading = true;
   images=[]
   arr=[];

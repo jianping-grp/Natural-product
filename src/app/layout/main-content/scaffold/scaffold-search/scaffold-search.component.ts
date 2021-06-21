@@ -18,7 +18,7 @@ export class ScaffoldSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.jsmeSmiles = 'C1=C2C3CCCC3CCC2C2CCCCC2C1';
+    this.jsmeSmiles = 'O=C(C[n+]1ccccc1)c1ccccc1';
   }
   getJsmeSmiles() {
     this.jsmeSmiles = this.jsme.smiles;

@@ -21,7 +21,7 @@
   </div>
   <div class="col-md-5">
     <h5>SMILES:</h5>
-    <textarea class="smile-container" [value]="jsmeSmiles" #textarea></textarea>
+    <textarea class="smile-container" [(ngModel)]="jsmeSmiles" #textarea></textarea>
     
       <h6>Fragment Method:</h6>
       <mat-radio-group [(ngModel)]="structureType">

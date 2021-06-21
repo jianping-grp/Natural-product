@@ -110,6 +110,8 @@ echarts
 		  <th class="mdl-data-table__cell--non-numeric">Show Structure</th>
 	  <!-- <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
 		  >PSA</th>	 -->
+		  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >Arrow Direction</th>
 
 	</tr>
 	<tr>
@@ -285,8 +287,18 @@ echarts
 		  (change)="showStructureM()"
 		></mat-slide-toggle>
 	  </td>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-label>Sort by</mat-label>
+		<mat-select [(value)]="selected">
+		  <mat-option *ngFor="let food of foods" [value]="food.value">
+			{{food.viewValue}}
+		  </mat-option>
+		</mat-select>
+      </td>
 	   </tr>
 	   <tr>
+		<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		>PSA</th>
 		<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
 		>AROM</th>	
 	<th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
@@ -305,6 +317,28 @@ echarts
 	>Submit</th>
 	</tr>
 	<tr>
+		<td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+			<mat-form-field class="form-width">
+			  <input matInput
+				 type="number"
+				 placeholder="PSA Min"
+				 [(ngModel)]="psaMin"
+				 min="0"
+				 step="1"
+				 max="1745">
+			</mat-form-field>
+			<br/>
+			<mat-form-field class="form-width">
+			  <input matInput
+				 type="number"
+				 placeholder="PSA Max"
+				 [(ngModel)]="psaMax"
+				 min="{{psaMin}}"
+				 step="1"
+				 max="1745">
+			</mat-form-field>
+			<p>range: 0~4000</p>
+			 </td>
 	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
 		<mat-form-field class="form-width">
 		  <input matInput
@@ -466,7 +500,9 @@ echarts
 	</tr>
 
   </table>
+
   <h4>Related Natural Products and Derivatives MMP Information</h4>
+  <a href="{{restHost}}/MMPAll/?assay_id='{{result1}}'&download=yes" class='down' download="文件名.csv"><h5>Click on the download</h5></a> 
 <table mat-table [dataSource]="images1" 
 matSort [el-loading]="isLoading"[text]="'It’s loading'"
 class="mat-elevation-z8">
@@ -616,9 +652,9 @@ class="mat-elevation-z8">
     </mat-select>
   </mat-form-field>
 	  <div class="mdl-cell mdl-cell--12-col">
-		<mat-paginator [length]="pageMeta.total_results"
-			   [pageSize]="pageMeta.per_page"
-			   [pageSizeOptions]="pageSizeOptions"
+		<mat-paginator [length]="count"
+			   [pageSize]="10"
+			   [pageSizeOptions]="[10,20,50,100]"
 			   (page)="pageChange($event)"
 		></mat-paginator>
     </div>
