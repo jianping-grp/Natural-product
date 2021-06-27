@@ -52,6 +52,7 @@ import { PropertiesCardDComponent } from './share/card/properties-card-d/propert
 import { DocCardComponent } from './share/card/doc-card/doc-card.component';
 import { MmpSingleComponent } from './layout/main-content/mmp-single/mmp-single.component';
 import { MmpDComponent } from './layout/main-content/mmp-d/mmp-d.component';
+import { DownloadComponent } from './layout/download/download.component';
 // import {NgxLoadingModule} from 'ngx-loading';
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { MmpDComponent } from './layout/main-content/mmp-d/mmp-d.component';
     DocCardComponent,
     MmpSingleComponent,
     MmpDComponent,
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,

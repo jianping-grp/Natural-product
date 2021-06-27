@@ -22,6 +22,22 @@ import {environment} from '../../../../environments/environment';
 export class DerivativeComponent implements OnInit {
   private restHost = environment.REST_HOST;
   countf
+  selected = 'MW'
+  foods= [
+    {value: 'MW', viewValue: 'MW'},
+    {value: 'ALOGP', viewValue: 'ALOGP'},
+    {value: 'HBD', viewValue: 'HBD'},
+    {value: 'HBA', viewValue: 'HBA'},
+    {value: 'ROTB', viewValue: 'ROTB'},
+    {value: 'PSA', viewValue: 'PSA'},
+    {value: 'AROM', viewValue: 'AROM'},
+    {value: 'ALERTS', viewValue: 'ALERTS'},
+    {value: 'qed', viewValue: 'qed'},
+    {value: 'sascore', viewValue: 'sascore'},
+    {value: 'npscore', viewValue: 'npscore'},
+    {value: 'freesasa', viewValue: 'freesasa'},
+    {value: 'max_phase', viewValue: 'max_phase'},
+  ];
   scaffold
   drugs
   counts
@@ -638,7 +654,7 @@ private _getDrugss(page?, perPage?) {
         })
       }
       updateNetworkData(){
-        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'&ptype=ALOGP'
+        this.key='MW:'+this.mwMin+'~'+this.mwMax+'+ALOGP:'+this.alogpMin+'~'+this.alogpMax+'+HBD:'+this.hbdMin+'~'+this.hbdMax+'+HBA:'+this.hbaMin+'~'+this.hbaMax+'+ROTB:'+this.rtbMin+'~'+this.rtbMax+'&ptype='+this.selected
         this.atr=this.result1+'&range='+this.key
         console.log(this.atr)
         console.log(this.dl)

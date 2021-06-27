@@ -16,6 +16,7 @@ import {BDerivativeComponent} from './layout/main-content/Bioactivites/b-derivat
 import {BTargetComponent} from './layout/main-content/Bioactivites/b-target/b-target.component';
 import {BTargetDComponent} from './layout/main-content/Bioactivites/b-target-d/b-target-d.component';
 import {ContactComponent} from './layout/main-content/contact/contact.component';
+import {DownloadComponent} from './layout/download/download.component';
 import {TableCompoundComponent} from './layout/main-content/table-compound/table-compound.component';
 import {TargetPredictionComponent} from './layout/main-content/target-prediction/target-prediction.component';
 import {ChemicalScreeningComponent} from './layout/main-content/chemical-screening/chemical-screening.component';
@@ -144,6 +145,10 @@ const routes: Routes = [
   {
     path:'tp',
     component:    TargetPredictionComponent
+  },
+  {
+    path:'download',
+    component:    DownloadComponent
   },
   {
     path:'cs',

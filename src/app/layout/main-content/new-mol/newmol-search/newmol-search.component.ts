@@ -19,7 +19,7 @@ export class NewmolSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.jsmeSmiles = 'C[C@H](CCC(=O)O)[C@H]1CC[C@H]2[C@H]3[C@H](CC[C@@]21C)[C@@]1(C)CC[C@@H](O)C[C@H]1C[C@H]3O';
+    this.jsmeSmiles = 'O=C(C[n+]1cc(Br)cc(Br)c1)c1ccc(Cl)cc1.[Br-]';
   }
   getJsmeSmiles() {
     this.jsmeSmiles = this.jsme.smiles;

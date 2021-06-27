@@ -227,8 +227,8 @@ echarts
 		  <th class="mdl-data-table__cell--non-numeric">Dynamic Network</th>
 		  <th class="mdl-data-table__cell--non-numeric">Nodes Name</th>
 		  <th class="mdl-data-table__cell--non-numeric">Show Structure</th>
-      <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
-		  >Degree</th>
+		  <th class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams"
+		  >Arrow Direction</th>
 
 
 	</tr>
@@ -384,14 +384,13 @@ echarts
 		  (change)="showStructureM()"
 		></mat-slide-toggle>
 	  </td>
-    <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
-      <mat-slider
-        [min]="1"
-        [max]="2"
-        [step]="1"
-        [thumbLabel]="true"
-        [(ngModel)]="dl"
-      ></mat-slider>
+	  <td class="mdl-data-table__cell--non-numeric" *ngIf="displayFilterParams">
+		<mat-label>Sort by</mat-label>
+		<mat-select [(value)]="selected">
+		  <mat-option *ngFor="let food of foods" [value]="food.value">
+			{{food.viewValue}}
+		  </mat-option>
+		</mat-select>
       </td>
 	   </tr>
 	   <tr>

@@ -155,7 +155,7 @@ export class SearchComponent implements OnInit {
         }});
       } 
       else if(this.structureType === 'MMP'){
-        this.jsme.smiles=`?pk1="${this.jsme.smiles}"`
+        this.jsme.smiles=`?pk1='${this.jsme.smiles}'`
         this.router.navigate(['/mmps/', this.jsme.smiles
         ])
     }

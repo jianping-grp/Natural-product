@@ -27,6 +27,12 @@
   width: 100%;
   table-layout: fixed
 }
+table td {
+  white-space:nowrap;
+  overflow:hidden;
+  word-break:keep-all;
+  text-overflow:ellipsis
+}
 
 
 /* td{
